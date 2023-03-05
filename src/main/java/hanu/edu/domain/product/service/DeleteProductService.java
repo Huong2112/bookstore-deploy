@@ -1,18 +1,15 @@
 package hanu.edu.domain.product.service;
 
-import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.repository.ProductRepository;
-import hanu.edu.infrustructure.product.repository.entity.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateProductService {
-
+public class DeleteProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void create(Product product) {
-        productRepository.save(ProductEntity.toEntity(product));
+    public void delete(long id) {
+        productRepository.deleteById(id);
     }
 }

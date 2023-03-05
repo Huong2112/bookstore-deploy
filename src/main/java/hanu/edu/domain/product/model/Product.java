@@ -3,6 +3,7 @@ package hanu.edu.domain.product.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import javax.persistence.Entity;
 import java.util.List;
 
 @AllArgsConstructor
