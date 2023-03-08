@@ -11,5 +11,5 @@ public class Customer {
     private int age;
     private String address;
     private String avatar;
-    private Phone phone;
+    private String phone;
 }

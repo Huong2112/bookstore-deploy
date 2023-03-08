@@ -1,7 +1,5 @@
 package hanu.edu.infrustructure.customer.repository.entity;
 
-import hanu.edu.domain.customer.model.Phone;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;

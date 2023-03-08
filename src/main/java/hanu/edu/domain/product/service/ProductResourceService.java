@@ -6,13 +6,21 @@ import hanu.edu.infrustructure.product.repository.entity.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//CRUD methods
 @Service
-public class CreateProductService {
-
+public class ProductResourceService {
     @Autowired
     private ProductRepository productRepository;
 
     public void create(Product product) {
         productRepository.save(ProductEntity.toEntity(product));
+    }
+
+    public Product getById(long id) {
+        return productRepository.getById(id);
+    }
+
+    public void deleteById(long id) {
+        productRepository.deleteById(id);
     }
 }

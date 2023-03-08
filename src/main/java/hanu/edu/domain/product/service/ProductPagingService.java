@@ -3,5 +3,5 @@ package hanu.edu.domain.product.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UpdateProductService {
+public class ProductPagingService {
 }
