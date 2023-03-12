@@ -1,11 +1,13 @@
 package hanu.edu.infrastructure.customer.repository.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity(name = "customer")
 @Table(name = "customer")
-@Entity
+
 public class CustomerEntity {
     @Id
     private long id;

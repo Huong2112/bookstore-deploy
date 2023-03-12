@@ -2,10 +2,9 @@ package hanu.edu.infrastructure.product.controller;
 
 import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.service.ProductResourceService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 public class ProductResourceController {
