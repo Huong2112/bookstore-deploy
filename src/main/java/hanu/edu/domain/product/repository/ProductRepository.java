@@ -1,7 +1,7 @@
 package hanu.edu.domain.product.repository;
 
 import hanu.edu.domain.product.model.Product;
-import hanu.edu.infrustructure.product.repository.entity.ProductEntity;
+import hanu.edu.infrastructure.product.repository.entity.ProductEntity;
 import org.springframework.data.domain.Page;
 
 public interface ProductRepository {

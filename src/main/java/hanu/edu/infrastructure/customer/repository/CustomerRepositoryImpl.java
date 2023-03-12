@@ -1,4 +1,4 @@
-package hanu.edu.infrustructure.customer.repository;
+package hanu.edu.infrastructure.customer.repository;
 
 import hanu.edu.domain.customer.model.Customer;
 import hanu.edu.domain.customer.repository.CustomerRepository;

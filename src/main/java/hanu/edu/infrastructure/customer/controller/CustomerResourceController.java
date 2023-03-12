@@ -1,4 +1,4 @@
-package hanu.edu.infrustructure.customer.controller;
+package hanu.edu.infrastructure.customer.controller;
 
 import org.springframework.stereotype.Controller;
 

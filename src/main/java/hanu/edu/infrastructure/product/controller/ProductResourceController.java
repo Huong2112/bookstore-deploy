@@ -1,4 +1,4 @@
-package hanu.edu.infrustructure.product.controller;
+package hanu.edu.infrastructure.product.controller;
 
 import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.service.ProductResourceService;

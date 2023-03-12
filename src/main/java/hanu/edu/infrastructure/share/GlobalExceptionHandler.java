@@ -1,4 +1,4 @@
-package hanu.edu.infrustructure.share;
+package hanu.edu.infrastructure.share;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;

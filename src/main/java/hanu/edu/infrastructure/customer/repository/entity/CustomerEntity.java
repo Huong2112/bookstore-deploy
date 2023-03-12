@@ -1,4 +1,4 @@
-package hanu.edu.infrustructure.customer.repository.entity;
+package hanu.edu.infrastructure.customer.repository.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
