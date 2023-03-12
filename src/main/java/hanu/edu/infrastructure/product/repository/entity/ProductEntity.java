@@ -1,14 +1,12 @@
 package hanu.edu.infrastructure.product.repository.entity;
 
 import hanu.edu.domain.product.model.Product;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductEntity {
     @Id
-
     private long id;
     private String name;
     private double price;
