@@ -1,15 +1,15 @@
 package hanu.edu.domain.customer.model;
 
-import lombok.AllArgsConstructor;
+import hanu.edu.domain.role.model.Role;
+import hanu.edu.domain.user.model.User;
 import lombok.Getter;
 
-@AllArgsConstructor
+import java.util.Set;
+
 @Getter
-public class Customer {
-    private long id;
-    private String name;
-    private int age;
-    private String address;
-    private String avatar;
-    private String phone;
+public class Customer extends User {
+
+    public Customer(long id, String username, String email, String password, boolean enabled, Set<Role> roles, String name, int age, String address, String avatar, String phone) {
+        super(id, username, email, password, enabled, roles, name, age, address, avatar, phone);
+    }
 }
