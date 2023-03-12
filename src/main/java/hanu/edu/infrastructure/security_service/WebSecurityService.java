@@ -37,7 +37,7 @@ public class WebSecurityService implements UserDetailsService, IWebSecurityServi
     @Transactional
     public void generateUsersRoles() {
         RoleEntity roleAdmin = new RoleEntity("ROLE_ADMIN");
-        RoleEntity roleUser = new RoleEntity("ROLE_USER");
+        RoleEntity roleUser = new RoleEntity("ROLE_CUSTOMER");
         if (roleRepository.count() == 0) {
             roleRepository.save(roleAdmin);
             roleRepository.save(roleUser);
