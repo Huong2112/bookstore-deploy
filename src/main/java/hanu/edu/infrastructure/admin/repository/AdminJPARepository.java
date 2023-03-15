@@ -1,10 +1,9 @@
 package hanu.edu.infrastructure.admin.repository;
 
-import hanu.edu.infrastructure.admin.repository.entity.AdminEntity;
+import hanu.edu.infrastructure.admin.entity.AdminEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Collection;
+import java.util.Optional;
 
 public interface AdminJPARepository extends JpaRepository<AdminEntity, Long> {
-    Collection<Object> findByUsername(String admin);
+    Optional<AdminEntity> findByUsername(String admin);
 }

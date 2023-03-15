@@ -5,11 +5,13 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Getter
+@Setter
 public class Product {
     private long id;
     @NotNull(message = "Name can't be null")

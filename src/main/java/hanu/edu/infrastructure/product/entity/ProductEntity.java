@@ -1,4 +1,4 @@
-package hanu.edu.infrastructure.product.repository.entity;
+package hanu.edu.infrastructure.product.entity;
 
 import hanu.edu.domain.product.model.Product;
 import jakarta.persistence.Entity;

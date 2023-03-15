@@ -1,59 +1,43 @@
 package hanu.edu.infrastructure.user.entity;
 
+import hanu.edu.domain.user.model.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Pattern;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.NaturalId;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity(name = "user")
-@Table(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @Getter
 @Setter
-public class UserEntity implements UserDetails {
+public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @NaturalId
-    @Column(unique = true, nullable = false)
-    @Length(min = 4, max = 20, message = "Usename should contain about 4-20 characters.")
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
     @NaturalId
-    @Column(unique = true, nullable = false)
-    @Email(message = "Invalid email.")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
-    @Length(min = 6, message = "Password should contains at least 6 characters.")
     private String password;
 
-    @Column(name = "enable")
-    private boolean enabled;
+    private boolean enabled = true;
 
-    @Transient
     @Column(name = "role")
-    private String role = new String();
+    private String role;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "age")
-    @Min(value = 10, message = "Age should not be less than 10.")
-    @Max(value = 100, message = "Age should not be greater than 100.")
     private int age;
 
     @Column(name = "address")
@@ -63,46 +47,29 @@ public class UserEntity implements UserDetails {
     private String avatar;
 
     @Column(name = "phone")
-    @Pattern(regexp = "[0-9]{10}", message = "Invalid phone number.")
     private String phone;
 
     public UserEntity(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-
-        this.role = "ROLE_USER";
-        this.enabled = true;
-        this.age = 10;
-        this.address = "";
-        this.avatar = "";
-        this.phone = "0000000000";
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(this.role));
-        return authorities;
+    public static UserEntity toEntity(User user) {
+        return UserEntity.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .enabled(user.isEnabled())
+                .role(user.getRole())
+                .name(user.getName())
+                .age(user.getAge())
+                .address(user.getAddress())
+                .avatar(user.getAvatar()).build();
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.enabled;
+    public User toUser() {
+        return new User(id, username, email, password, enabled, role, name, age, address, avatar, phone);
     }
 }
