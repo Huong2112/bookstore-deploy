@@ -16,7 +16,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/register").permitAll()
-                        .requestMatchers("/add", "/update/**", "/delete/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults())
@@ -29,9 +29,9 @@ public class WebSecurityConfig {
                         .permitAll()
                 )
                 .logout()
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .permitAll()
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .permitAll()
                 .and().rememberMe();
         return http.build();
     }

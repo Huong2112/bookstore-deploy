@@ -3,7 +3,6 @@ package hanu.edu.infrastructure.product.repository;
 import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.repository.ProductRepository;
 import hanu.edu.infrastructure.product.repository.entity.ProductEntity;
-import hanu.edu.infrastructure.product.repository.jpa.ProductJPARepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

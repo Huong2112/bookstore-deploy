@@ -10,7 +10,7 @@ public class AppRunner implements CommandLineRunner {
     private IWebSecurityService webSecurityService;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         webSecurityService.generateUsersRoles();
     }
 }
