@@ -1,6 +1,6 @@
 package hanu.edu.infrastructure.customer.repository.entity;
 
-import hanu.edu.infrastructure.user.entity.UserEntity;
+import hanu.edu.infrastructure.user.repository.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -3,7 +3,7 @@ package hanu.edu.infrastructure.security_service;
 import hanu.edu.infrastructure.admin.repository.entity.AdminEntity;
 import hanu.edu.infrastructure.admin.repository.AdminJPARepository;
 import hanu.edu.infrastructure.customer.repository.CustomerJPARepository;
-import hanu.edu.infrastructure.user.entity.UserEntity;
+import hanu.edu.infrastructure.user.repository.entity.UserEntity;
 import hanu.edu.infrastructure.user.repository.UserJPARepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

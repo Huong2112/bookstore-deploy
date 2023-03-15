@@ -1,4 +1,4 @@
-package hanu.edu.infrastructure.user.entity;
+package hanu.edu.infrastructure.user.repository.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

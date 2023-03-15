@@ -1,6 +1,6 @@
 package hanu.edu.infrastructure.admin.repository.entity;
 
-import hanu.edu.infrastructure.user.entity.UserEntity;
+import hanu.edu.infrastructure.user.repository.entity.UserEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
