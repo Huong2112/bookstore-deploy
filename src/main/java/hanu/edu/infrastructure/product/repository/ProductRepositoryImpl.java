@@ -13,6 +13,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Autowired
     private ProductJPARepository productJPARepository;
+
     @Override
     public Product getById(long id) {
         return productJPARepository.findById(id).orElseThrow().toProduct();

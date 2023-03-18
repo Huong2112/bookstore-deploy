@@ -1,10 +1,7 @@
 package hanu.edu.infrastructure.admin.repository;
 
-import hanu.edu.domain.admin.model.Admin;
 import hanu.edu.domain.admin.repository.AdminRepository;
 import hanu.edu.infrastructure.admin.entity.AdminEntity;
-import hanu.edu.infrastructure.customer.entity.CustomerEntity;
-import hanu.edu.infrastructure.customer.repository.CustomerJPARepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

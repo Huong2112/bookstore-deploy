@@ -2,7 +2,10 @@ package hanu.edu.infrastructure.user.entity;
 
 import hanu.edu.domain.user.model.User;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.NaturalId;
 
@@ -53,6 +56,7 @@ public class UserEntity {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.enabled = true;
     }
 
     public static UserEntity toEntity(User user) {
