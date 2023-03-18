@@ -17,6 +17,7 @@ public class UserResourceService {
     public Optional<User> getByUsername(String username) {
         return Optional.ofNullable(userRepository.findByUsername(username).get().toUser());
     }
+
     public void create(User user) {
         userRepository.save(UserEntity.toEntity(user));
     }

@@ -1,8 +1,6 @@
 package hanu.edu.infrastructure.user.repository;
 
 import hanu.edu.domain.user.repository.UserRepository;
-import hanu.edu.infrastructure.product.entity.ProductEntity;
-import hanu.edu.infrastructure.product.repository.ProductJPARepository;
 import hanu.edu.infrastructure.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

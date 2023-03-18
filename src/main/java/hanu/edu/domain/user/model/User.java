@@ -1,6 +1,8 @@
 package hanu.edu.domain.user.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -11,7 +13,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

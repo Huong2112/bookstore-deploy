@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,16 +39,17 @@ public class ProductEntity {
 
     public static String imagesToString(List<String> images) {
         String imagesToString = "";
-        for(String image: images) {
+        for (String image : images) {
             imagesToString += image + " ";
         }
         return imagesToString;
     }
+
     public Product toProduct() {
         List<String> imageList = new ArrayList<>();
-        if(images != null) {
+        if (images != null) {
             String[] imageArray = images.split(" ");
-            for(int i = 0; i < imageArray.length; i++) {
+            for (int i = 0; i < imageArray.length; i++) {
                 imageList.add(imageArray[i]);
             }
         }
