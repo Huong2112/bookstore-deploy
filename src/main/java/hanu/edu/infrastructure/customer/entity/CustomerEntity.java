@@ -25,7 +25,7 @@ public class CustomerEntity extends UserEntity {
                 .email(customer.getEmail())
                 .password(customer.getPassword())
                 .enabled(customer.isEnabled())
-                .role(customer.getRole())
+                .role("ROLE_CUSTOMER")
                 .name(customer.getName())
                 .age(customer.getAge())
                 .address(customer.getAddress())

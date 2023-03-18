@@ -62,7 +62,7 @@ public class UserEntity {
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .enabled(user.isEnabled())
-                .role(user.getRole())
+                .role("ROLE_USER")
                 .name(user.getName())
                 .age(user.getAge())
                 .address(user.getAddress())
