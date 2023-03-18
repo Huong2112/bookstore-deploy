@@ -24,6 +24,7 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/register").permitAll()
+                        .requestMatchers("/css/**","/js/**","/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults())
