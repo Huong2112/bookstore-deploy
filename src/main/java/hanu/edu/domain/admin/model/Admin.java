@@ -2,8 +2,10 @@ package hanu.edu.domain.admin.model;
 
 import hanu.edu.domain.user.model.User;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class Admin extends User {
 
     public Admin(long id, String username, String email, String password, boolean enabled, String role, String name, int age, String address, String avatar, String phone) {

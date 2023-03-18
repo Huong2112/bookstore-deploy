@@ -1,4 +1,4 @@
-package hanu.edu.infrastructure.security_service;
+package hanu.edu.domain.security.service;
 
 import jakarta.transaction.Transactional;
 

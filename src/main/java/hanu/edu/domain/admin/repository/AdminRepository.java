@@ -1,7 +1,12 @@
 package hanu.edu.domain.admin.repository;
 
-import hanu.edu.domain.admin.model.Admin;
+import hanu.edu.infrastructure.admin.entity.AdminEntity;
+
+import java.util.Collection;
+import java.util.Optional;
 
 public interface AdminRepository {
-    void save(Admin admin);
+
+    void save(AdminEntity adminEntity);
+    Optional<AdminEntity> findByUsername(String username);
 }

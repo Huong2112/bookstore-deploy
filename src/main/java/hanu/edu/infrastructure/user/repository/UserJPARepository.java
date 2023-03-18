@@ -1,6 +1,6 @@
 package hanu.edu.infrastructure.user.repository;
 
-import hanu.edu.infrastructure.user.repository.entity.UserEntity;
+import hanu.edu.infrastructure.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
