@@ -1,22 +1,22 @@
 package hanu.edu.infrastructure.product.entity;
 
 import hanu.edu.domain.product.model.Product;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-@Table(name = "product")
-@Entity
+@Entity(name = "product")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private double price;
@@ -37,20 +37,23 @@ public class ProductEntity {
     }
 
     public static String imagesToString(List<String> images) {
-        String imagesToString = "";
+        StringBuilder imagesToString = new StringBuilder();
         for (String image : images) {
-            imagesToString += image + " ";
+            imagesToString.append(image).append(" ");
         }
-        return imagesToString;
+        return imagesToString.toString();
+    }
+
+    public static List<String> stringToImages(String imagesString) {
+        String[] imagesArray = imagesString.split(" ");
+        return new ArrayList<>(List.of(imagesArray));
     }
 
     public Product toProduct() {
         List<String> imageList = new ArrayList<>();
         if (images != null) {
             String[] imageArray = images.split(" ");
-            for (int i = 0; i < imageArray.length; i++) {
-                imageList.add(imageArray[i]);
-            }
+            Collections.addAll(imageList, imageArray);
         }
         return new Product(id, name, price, description, inStock, imageList, rate);
     }

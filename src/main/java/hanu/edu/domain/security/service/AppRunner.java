@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppRunner implements CommandLineRunner {
     @Autowired
-    private IWebSecurityService webSecurityService;
+    private SecurityService securityService;
 
     @Override
     public void run(String... args) {
-        webSecurityService.generateUsersRoles();
+        securityService.generateUsersRoles();
     }
 }
