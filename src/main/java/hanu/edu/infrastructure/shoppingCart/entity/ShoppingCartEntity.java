@@ -1,8 +1,8 @@
 package hanu.edu.infrastructure.shoppingCart.entity;
 
 import hanu.edu.domain.shoppingCart.model.ShoppingCart;
-import hanu.edu.infrastructure.Item.entity.ItemEntity;
 import hanu.edu.infrastructure.customer.entity.CustomerEntity;
+import hanu.edu.infrastructure.item.entity.ItemEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +34,7 @@ public class ShoppingCartEntity {
         return ShoppingCartEntity.builder()
                 .customerId(shoppingCart.getCustomerId())
                 .itemEntities(shoppingCart.getItems() == null ? null :
-                shoppingCart.getItems().stream().map(ItemEntity::toEntity).collect(Collectors.toList()))
+                        shoppingCart.getItems().stream().map(ItemEntity::toEntity).collect(Collectors.toList()))
                 .build();
     }
 

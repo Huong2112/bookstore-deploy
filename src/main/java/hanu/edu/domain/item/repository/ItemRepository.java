@@ -1,10 +1,11 @@
-package hanu.edu.domain.Item.repository;
+package hanu.edu.domain.item.repository;
 
-import hanu.edu.domain.Item.model.Item;
+import hanu.edu.domain.item.model.Item;
 
 import java.util.List;
 
 public interface ItemRepository {
     public void save(Item item);
+
     public List<Item> getByProductId(long productId);
 }

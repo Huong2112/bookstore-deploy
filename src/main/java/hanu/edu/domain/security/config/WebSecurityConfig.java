@@ -77,9 +77,9 @@ public class WebSecurityConfig {
         AuthenticationManager manager = builder.build();
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/register", "/login**", "/login", "/", "/search").permitAll()
                         .requestMatchers("/my_cart/**").hasAuthority("ROLE_USER")
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/register", "/login**", "/login", "/", "/search", "/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults())

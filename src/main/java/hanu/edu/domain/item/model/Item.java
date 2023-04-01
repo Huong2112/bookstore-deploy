@@ -1,4 +1,4 @@
-package hanu.edu.domain.Item.model;
+package hanu.edu.domain.item.model;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

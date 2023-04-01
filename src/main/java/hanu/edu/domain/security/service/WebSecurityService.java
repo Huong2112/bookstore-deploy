@@ -31,7 +31,6 @@ public class WebSecurityService implements UserDetailsService, IWebSecurityServi
     public void generateUsersRoles() {
         if (adminRepository.findByUsername("root").isEmpty()) {
             AdminEntity adminEntity = new AdminEntity("root", encoder.encode("root"), "root@gmail.com");
-            adminEntity.setName("root");
             adminRepository.save(adminEntity);
         }
     }

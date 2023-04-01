@@ -1,6 +1,6 @@
 package hanu.edu.application.shoppingCart.controller;
 
-import hanu.edu.domain.Item.model.Item;
+import hanu.edu.domain.item.model.Item;
 import hanu.edu.domain.shoppingCart.service.AddToShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

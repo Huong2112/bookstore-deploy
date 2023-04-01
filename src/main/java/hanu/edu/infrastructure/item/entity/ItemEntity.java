@@ -1,7 +1,6 @@
-package hanu.edu.infrastructure.Item.entity;
+package hanu.edu.infrastructure.item.entity;
 
-import hanu.edu.domain.Item.model.Item;
-import hanu.edu.infrastructure.product.entity.ProductEntity;
+import hanu.edu.domain.item.model.Item;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

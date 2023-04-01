@@ -1,6 +1,5 @@
 package hanu.edu.infrastructure.customer.repository;
 
-import hanu.edu.domain.customer.model.Customer;
 import hanu.edu.infrastructure.customer.entity.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

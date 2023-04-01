@@ -1,7 +1,6 @@
-package hanu.edu.infrastructure.Item.repository;
+package hanu.edu.infrastructure.item.repository;
 
-import hanu.edu.domain.Item.model.Item;
-import hanu.edu.infrastructure.Item.entity.ItemEntity;
+import hanu.edu.infrastructure.item.entity.ItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
