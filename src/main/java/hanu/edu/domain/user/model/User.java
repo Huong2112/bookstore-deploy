@@ -1,17 +1,9 @@
 package hanu.edu.domain.user.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,15 +16,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
 public class User implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NaturalId
-    @Length(min = 4, max = 20, message = "Usename should contain about 4-20 characters.")
+    @Length(min = 4, max = 20, message = "Username should contain about 4-20 characters.")
     private String username;
-    @NaturalId
+    @NotEmpty
     @Email(message = "Invalid email.")
     private String email;
     @Length(min = 6, message = "Password should contains at least 6 characters.")
@@ -42,11 +30,11 @@ public class User implements UserDetails {
     private String name;
     @Min(value = 10, message = "Age should not be less than 10.")
     @Max(value = 80, message = "Age should not be greater than 80.")
-    private int age;
+    private int age = 20;
     private String address;
     private String avatar;
     @Pattern(regexp = "[0-9]{10}", message = "Invalid phone number.")
-    private String phone;
+    private String phone = "0123456789";
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -73,5 +61,25 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return this.enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -1,10 +1,9 @@
 package hanu.edu.domain.admin.service;
 
 import hanu.edu.domain.admin.model.Admin;
-import hanu.edu.domain.admin.repository.AdminRepository;
+import hanu.edu.domain.user.repository.UserRepository;
 import hanu.edu.domain.user.service.UserResourceService;
 import hanu.edu.infrastructure.admin.entity.AdminEntity;
-import hanu.edu.infrastructure.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +12,9 @@ import org.springframework.stereotype.Service;
 public class AdminResourceService extends UserResourceService {
 
     @Autowired
-    private AdminRepository adminRepository;
+    private UserRepository userRepository;
 
     public void create(Admin admin) {
-        adminRepository.save((AdminEntity) UserEntity.toEntity(admin));
+        userRepository.save(AdminEntity.toEntity(admin));
     }
 }
