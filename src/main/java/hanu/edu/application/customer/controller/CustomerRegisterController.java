@@ -16,13 +16,8 @@ public class CustomerRegisterController {
     @Autowired
     CustomerResourceService customerResourceService;
 
-    @Autowired
-    private BCryptPasswordEncoder encoder;
-
     @PostMapping(value = "/register")
     public ResponseEntity<String> register(@RequestBody Customer customer) {
-        String encodedPassword = encoder.encode(customer.getPassword());
-        customer.setPassword(encodedPassword);
         customerResourceService.create(customer);
         return new ResponseEntity<>("User registered successfully!", HttpStatus.CREATED);
     }

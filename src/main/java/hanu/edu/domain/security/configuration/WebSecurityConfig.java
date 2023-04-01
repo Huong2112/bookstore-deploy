@@ -23,7 +23,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/register").permitAll()
+                        .requestMatchers("/register", "/addToShoppingCart").permitAll()
                         .requestMatchers("/css/**","/js/**","/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
