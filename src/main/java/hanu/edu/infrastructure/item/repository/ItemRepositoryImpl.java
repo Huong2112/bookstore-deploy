@@ -23,4 +23,9 @@ public class ItemRepositoryImpl implements ItemRepository {
     public List<Item> getByProductId(long productId) {
         return itemJPARepository.findByProductId(productId).stream().map(ItemEntity::toItem).collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteByItemId(long itemId) {
+        itemJPARepository.deleteByItemId(itemId);
+    }
 }

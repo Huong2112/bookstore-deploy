@@ -27,4 +27,9 @@ public class CustomerEntity extends UserEntity {
                 .address(customer.getAddress())
                 .avatar(customer.getAvatar()).build();
     }
+
+    public Customer toCustomer() {
+        return new Customer(getId(),getUsername(), getEmail(), getPassword(), isEnabled(), getRole(),
+                getName(), getAge(), getAddress(), getAvatar(), getPhone());
+    }
 }

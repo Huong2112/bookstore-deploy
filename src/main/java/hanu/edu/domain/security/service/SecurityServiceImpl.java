@@ -1,10 +1,13 @@
 package hanu.edu.domain.security.service;
 
 import hanu.edu.domain.customer.model.Customer;
+import hanu.edu.domain.customer.repository.CustomerRepository;
 import hanu.edu.domain.customer.service.CustomerResourceService;
 import hanu.edu.domain.security.dto.BaseResponseDTO;
 import hanu.edu.domain.security.dto.UserDTO;
 import hanu.edu.domain.security.exception.BaseException;
+import hanu.edu.domain.shoppingCart.model.ShoppingCart;
+import hanu.edu.domain.shoppingCart.repository.ShoppingCartRepository;
 import hanu.edu.domain.user.model.User;
 import hanu.edu.domain.user.repository.UserRepository;
 import hanu.edu.infrastructure.admin.entity.AdminEntity;
@@ -32,6 +35,11 @@ public class SecurityServiceImpl implements SecurityService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private ShoppingCartRepository shoppingCartRepository;
+
     @Override
     public BaseResponseDTO registerAccount(UserDTO userDTO) {
         BaseResponseDTO response = new BaseResponseDTO();
@@ -45,6 +53,8 @@ public class SecurityServiceImpl implements SecurityService {
             response.setCode(String.valueOf(HttpStatus.SERVICE_UNAVAILABLE.value()));
             response.setMessage("Service unavailable!");
         }
+        Customer customerFromDB = customerRepository.getByEmail(customer.getEmail());
+        shoppingCartRepository.save(new ShoppingCart(customerFromDB.getId(), null));
         return response;
     }
 

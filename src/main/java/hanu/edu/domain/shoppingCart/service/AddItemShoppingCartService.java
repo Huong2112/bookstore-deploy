@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AddToShoppingCartService {
+public class AddItemShoppingCartService {
 
     @Autowired
     private ItemRepository itemRepository;
@@ -24,7 +24,7 @@ public class AddToShoppingCartService {
         boolean inCart = false;
         for (Item i : items) {
             if (i.getProductId() == item.getProductId()) {
-                i.setQuantity(i.getQuantity() + item.getQuantity());
+                i.setQuantity(item.getQuantity());
                 itemRepository.save(i);
                 inCart = true;
                 break;
@@ -32,7 +32,6 @@ public class AddToShoppingCartService {
         }
         if (!inCart) {
             items.add(item);
-            itemRepository.save(item);
         }
         cart.setItems(items);
         shoppingCartRepository.save(cart);
