@@ -50,7 +50,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Page<Product> sortProductsBy(String direction, int page, int size, String... properties) {
+    public Page<Product> sortProductsBy(int page, int size, String direction, String... properties) {
         PageRequest pageRequest;
         if (direction.equals("asc")) {
             pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, properties);
