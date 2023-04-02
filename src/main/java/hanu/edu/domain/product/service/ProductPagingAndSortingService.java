@@ -19,8 +19,8 @@ public class ProductPagingAndSortingService {
         return productRepository.searchProductsByName(index, size, name);
     }
 
-    public Page<Product> sortProductsBy(String direction, int index, int size, String... properties) {
-        return productRepository.sortProductsBy(direction, index, size, properties);
+    public Page<Product> sortProductsBy(int index, int size, String direction, String... properties) {
+        return productRepository.sortProductsBy(index, size, direction, properties);
     }
 
 }

@@ -16,27 +16,27 @@ public class ProductPagingAndSortingController {
     @Autowired
     private ProductPagingAndSortingService productPagingAndSortingService;
 
-    @GetMapping({"/{index}", "/"})
-    public Page<Product> getProductsSorted(@PathVariable(name = "index") Optional<Integer> index, @PathParam("direction") String direction, @PathParam("price") boolean price) {
+    @GetMapping({"/{pageNo}", "/"})
+    public Page<Product> getProductsBy(@PathVariable(name = "pageNo") Optional<Integer> pageNo, @PathParam("direction") String direction, @PathParam("price") boolean price) {
         int page;
-        if (!index.isPresent()) page = 0;
-        else page = index.get();
+        if (!pageNo.isPresent()) page = 0;
+        else page = pageNo.get();
         if (price == true && direction != null && !direction.isEmpty()) {
-            return productPagingAndSortingService.sortProductsBy(direction, page, 20, "price");
+            return productPagingAndSortingService.sortProductsBy(page, 20, direction, "price");
         } else if (price == true) {
-            return productPagingAndSortingService.sortProductsBy("asc", page, 20, "price");
+            return productPagingAndSortingService.sortProductsBy(page, 20, "asc", "price");
         } else if (direction != null && !direction.isEmpty()) {
-            return productPagingAndSortingService.sortProductsBy(direction, page, 20, "name");
+            return productPagingAndSortingService.sortProductsBy(page, 20, direction, "name");
         } else {
             return productPagingAndSortingService.getAllProductsByPage(page, 20);
         }
     }
 
-    @GetMapping({"/search", "/search/{index}"})
-    public Page<Product> getProductsByName(@PathVariable(name = "index") Optional<Integer> index, @PathParam("name") String name) {
+    @GetMapping({"/search", "/search/{pageNo}"})
+    public Page<Product> getProductsByName(@PathVariable(name = "pageNo") Optional<Integer> pageNo, @PathParam("name") String name) {
         int page;
-        if (!index.isPresent()) page = 0;
-        else page = index.get();
+        if (!pageNo.isPresent()) page = 0;
+        else page = pageNo.get();
         if (name != null && !name.isEmpty()) {
             return productPagingAndSortingService.searchProductsByName(page, 20, name);
         } else {
