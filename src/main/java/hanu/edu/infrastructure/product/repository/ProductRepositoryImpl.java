@@ -27,6 +27,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    public Product getByName(String name) {
+        ProductEntity productEntity = productJPARepository.findByName(name);
+        return productEntity == null? null: productEntity.toProduct();
+    }
+
+    @Override
     public void deleteById(long id) {
         productJPARepository.deleteById(id);
     }

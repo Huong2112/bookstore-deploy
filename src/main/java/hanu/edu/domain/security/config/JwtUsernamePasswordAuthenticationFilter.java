@@ -11,6 +11,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +23,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
@@ -48,7 +51,10 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         User user = (User) authentication.getPrincipal();
         String accessToken = jwtService.generateToken(user);
-        String json = HelperUtils.JSON_WRITER.writeValueAsString(accessToken);
+        Map map = new HashMap();
+        map.put("accessToken", accessToken);
+        map.put("userId", user.getId());
+        String json = objectMapper.writeValueAsString(map);
         response.getWriter().write(json);
         response.setContentType("application/json; charset=UTF-8");
         log.info("End success authentication: {}", accessToken);

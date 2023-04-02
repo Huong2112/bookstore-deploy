@@ -42,7 +42,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                 if (jwtService.isValidToken(accessToken)) {
                     Claims claims = jwtService.extractClaims(accessToken);
                     String username = claims.getSubject();
-                    List<String> authorities = claims.get("authorities", List.class);
+                    List<String> authorities = claims.get("authority", List.class);
                     if (!ObjectUtils.isEmpty(username)) {
                         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username,
                                 null,
@@ -51,6 +51,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                     }
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 log.error("Error on filter once per request, path {}, errror: {}", request.getRequestURI(), e.getMessage());
                 BaseResponseDTO responseDTO = new BaseResponseDTO();
                 responseDTO.setCode(String.valueOf(HttpStatus.UNAUTHORIZED.value()));

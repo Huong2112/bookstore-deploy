@@ -1,15 +1,14 @@
 package hanu.edu.domain.security.jwt;
 
-
-import lombok.Data;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 
-@Data
+@Getter
 public class JwtConfig {
     @Value("${jwt.url:/login}")
     private String url;
 
-    @Value("${jwt.header:Authorization")
+    @Value("Authorization")
     private String header;
 
     @Value("${jwt.prefix:Bearer}")

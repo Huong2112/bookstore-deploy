@@ -33,7 +33,7 @@ public class GetItemsShoppingCartService {
                     .price(product.getPrice())
                     .inStock(product.getInStock())
                     .images(product.getImages())
-                    .rate(product.getRate())
+                    .category(product.getCategory())
                     .quantity(i.getQuantity()).build();
             outputCarts.add(outputCart);
         }
@@ -50,5 +50,5 @@ class OutputCart {
     private String description;
     private long inStock;
     private List<String> images;
-    private float rate;
+    private String category;
 }

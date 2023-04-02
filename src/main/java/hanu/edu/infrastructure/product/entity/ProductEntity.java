@@ -1,8 +1,7 @@
 package hanu.edu.infrastructure.product.entity;
 
 import hanu.edu.domain.product.model.Product;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -17,13 +16,15 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true)
     private String name;
     private double price;
     private String description;
     private long inStock;
     private String images;
-    private float rate;
+    private String category;
 
     public static ProductEntity toEntity(Product product) {
         return ProductEntity.builder()
@@ -33,7 +34,7 @@ public class ProductEntity {
                 .description(product.getDescription())
                 .inStock(product.getInStock())
                 .images(product.getImages() == null ? null : imagesToString(product.getImages()))
-                .rate(product.getRate()).build();
+                .category(product.getCategory()).build();
     }
 
     public static String imagesToString(List<String> images) {
@@ -55,6 +56,6 @@ public class ProductEntity {
             String[] imageArray = images.split(" ");
             Collections.addAll(imageList, imageArray);
         }
-        return new Product(id, name, price, description, inStock, imageList, rate);
+        return new Product(id, name, price, description, inStock, imageList, category);
     }
 }

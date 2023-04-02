@@ -7,17 +7,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
-public class Item {
-    private long itemId;
+public class ItemDTO {
+    @NotNull
     private long productId;
-    @Setter
+    @Min(1)
     private long quantity;
-
-    public Item(long productId, long quantity) {
-        this.productId = productId;
-        this.quantity = quantity;
-    }
 }
