@@ -1,5 +1,6 @@
 package hanu.edu.infrastructure.user.repository;
 
+import hanu.edu.domain.customer.model.Customer;
 import hanu.edu.domain.user.repository.UserRepository;
 import hanu.edu.infrastructure.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +22,5 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<UserEntity> findByUsername(String username) {
         return userJPARepository.findByUsername(username);
     }
+
 }

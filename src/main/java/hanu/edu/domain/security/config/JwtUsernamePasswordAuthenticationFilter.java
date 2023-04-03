@@ -52,7 +52,6 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
         response.getWriter().write(json);
         response.setContentType("application/json; charset=UTF-8");
         log.info("End success authentication: {}", accessToken);
-
     }
 
     @Override

@@ -77,7 +77,7 @@ public class WebSecurityConfig {
         AuthenticationManager manager = builder.build();
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-//                        .requestMatchers("/cart/**").hasAuthority("ROLE_USER")
+                        .requestMatchers("/cart/**", "/account").hasAuthority("ROLE_CUSTOMER")
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/register", "/login**", "/login", "/", "/search", "/**", "/cart/*").permitAll()
                         .anyRequest().authenticated()
@@ -85,6 +85,7 @@ public class WebSecurityConfig {
                 .httpBasic(withDefaults())
                 .cors(withDefaults())
                 .csrf().disable()
+
                 .headers().frameOptions().sameOrigin()
                 .and().authenticationManager(manager)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
