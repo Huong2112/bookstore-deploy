@@ -24,7 +24,7 @@ public class GetItemsShoppingCartService {
     public List<OutputCart> getItem(long customerId) {
         ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
         List<OutputCart> outputCarts = new ArrayList<>();
-        for(Item i: cart.getItems()) {
+        for (Item i : cart.getItems()) {
             Product product = productRepository.getById(i.getProductId());
             OutputCart outputCart = OutputCart.builder()
                     .productId(product.getId())
@@ -33,13 +33,14 @@ public class GetItemsShoppingCartService {
                     .price(product.getPrice())
                     .inStock(product.getInStock())
                     .images(product.getImages())
-                    .rate(product.getRate())
+                    .category(product.getCategory())
                     .quantity(i.getQuantity()).build();
             outputCarts.add(outputCart);
         }
         return outputCarts;
     }
 }
+
 @Builder
 @Getter
 class OutputCart {
@@ -50,5 +51,5 @@ class OutputCart {
     private String description;
     private long inStock;
     private List<String> images;
-    private float rate;
+    private String category;
 }

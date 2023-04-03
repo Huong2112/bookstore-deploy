@@ -29,7 +29,7 @@ public class CustomerEntity extends UserEntity {
     }
 
     public Customer toCustomer() {
-        return new Customer(getId(),getUsername(), getEmail(), getPassword(), isEnabled(), getRole(),
+        return new Customer(getId(), getUsername(), getEmail(), getPassword(), isEnabled(), getRole(),
                 getName(), getAge(), getAddress(), getAvatar(), getPhone());
     }
 }

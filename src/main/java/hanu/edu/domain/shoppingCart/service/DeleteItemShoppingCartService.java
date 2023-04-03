@@ -22,9 +22,9 @@ public class DeleteItemShoppingCartService {
     public void deleteItem(long productId, long customerId) {
         ShoppingCart shoppingCart = shoppingCartRepository.getByCustomerId(customerId);
         List<Item> items = shoppingCart.getItems();
-        if(items != null) {
-            for(Item i: items) {
-                if(i.getProductId() == productId) {
+        if (items != null) {
+            for (Item i : items) {
+                if (i.getProductId() == productId) {
                     items.remove(i);
                     shoppingCart.setItems(items);
                     itemRepository.deleteByItemId(i.getItemId());

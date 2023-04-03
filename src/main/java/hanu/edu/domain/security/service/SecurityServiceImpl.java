@@ -46,15 +46,18 @@ public class SecurityServiceImpl implements SecurityService {
         validateAccount(userDTO);
         Customer customer = insertUser(userDTO);
         try {
+            // create user
             customerResourceService.create(customer);
+            // create user's cart
+            Customer customerFromDB = customerRepository.getByEmail(customer.getEmail());
+            shoppingCartRepository.save(new ShoppingCart(customerFromDB.getId(), null));
             response.setCode(String.valueOf(HttpStatus.CREATED.value()));
             response.setMessage("Register account successfully!");
+        // lost connection :v
         } catch (Exception e) {
             response.setCode(String.valueOf(HttpStatus.SERVICE_UNAVAILABLE.value()));
             response.setMessage("Service unavailable!");
         }
-        Customer customerFromDB = customerRepository.getByEmail(customer.getEmail());
-        shoppingCartRepository.save(new ShoppingCart(customerFromDB.getId(), null));
         return response;
     }
 
@@ -69,19 +72,23 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     private void validateAccount(UserDTO userDTO) {
+        // check if request is empty or null
         if (ObjectUtils.isEmpty(userDTO)) {
             throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Request data not found!");
         }
 
         try {
+            // check if fields are existed and are set
             if (!ObjectUtils.isEmpty(userDTO.checkProperties())) {
                 throw new BaseException(String.valueOf(HttpStatus.BAD_REQUEST.value()), "Request data not found!");
             }
         } catch (IllegalAccessException e) {
+            // if a field is not existed | null
             throw new BaseException(String.valueOf(HttpStatus.SERVICE_UNAVAILABLE.value()), "Service unavailable!!");
         }
 
         Optional<UserEntity> userEntity = userRepository.findByUsername(userDTO.getUsername());
+        // check if user exists
         if (userEntity.isPresent()) {
             User user = userEntity.get().toUser();
             if (!ObjectUtils.isEmpty(user)) {

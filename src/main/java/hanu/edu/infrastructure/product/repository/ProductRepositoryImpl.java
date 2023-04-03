@@ -27,6 +27,12 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    public Product getByName(String name) {
+        ProductEntity productEntity = productJPARepository.findByName(name);
+        return productEntity == null ? null : productEntity.toProduct();
+    }
+
+    @Override
     public void deleteById(long id) {
         productJPARepository.deleteById(id);
     }
@@ -44,7 +50,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Page<Product> sortProductsBy(String direction, int page, int size, String... properties) {
+    public Page<Product> sortProductsBy(int page, int size, String direction, String... properties) {
         PageRequest pageRequest;
         if (direction.equals("asc")) {
             pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, properties);
