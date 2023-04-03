@@ -43,11 +43,6 @@ public class WebSecurityConfig {
         return new JwtConfig();
     }
 
-    @Autowired
-    public void configGlobal(final AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(customAuthenticationProvider);
-    }
-
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomUserDetailsService();
@@ -56,6 +51,11 @@ public class WebSecurityConfig {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public void configGlobal(final AuthenticationManagerBuilder auth) {
+        auth.authenticationProvider(customAuthenticationProvider);
     }
 
     @Bean
@@ -73,11 +73,13 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        builder.userDetailsService(userDetailsService()).passwordEncoder(bCryptPasswordEncoder());
+        builder.userDetailsService(userDetailsService())
+                .passwordEncoder(bCryptPasswordEncoder());
         AuthenticationManager manager = builder.build();
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/cart/**").hasAuthority("ROLE_CUSTOMER")
+
+                        // .requestMatchers("/cart/**").hasAuthority("ROLE_CUSTOMER")
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/register", "/login**", "/login", "/", "/search", "/**", "/product").permitAll()
                         .anyRequest().authenticated()
@@ -85,13 +87,14 @@ public class WebSecurityConfig {
                 .httpBasic(withDefaults())
                 .cors(withDefaults())
                 .csrf().disable()
+
                 .headers().frameOptions().sameOrigin()
-                .and().authenticationManager(manager)
+                .and().authenticationManager(manager) // set authentication manager
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint(
-                        (((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED)))
+                .authenticationEntryPoint((request, response, authException) -> // set authentication entry point
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED)
                 )
                 .accessDeniedHandler(new CustomAccessDeniedHandler())
                 .and()

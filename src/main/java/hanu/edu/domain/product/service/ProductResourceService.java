@@ -6,7 +6,6 @@ import hanu.edu.domain.security.exception.BaseException;
 import hanu.edu.infrastructure.product.entity.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 //CRUD methods
@@ -17,11 +16,12 @@ public class ProductResourceService {
 
     public void create(Product product) {
         Product productFromDB = productRepository.getByName(product.getName());
-        if(productFromDB != null) {
+        if (productFromDB != null) {
             throw new BaseException("500", "Duplicate name");
         }
         productRepository.save(ProductEntity.toEntity(product));
     }
+
     public void update(Product product) {
         productRepository.save(ProductEntity.toEntity(product));
     }

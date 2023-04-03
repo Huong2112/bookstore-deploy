@@ -10,6 +10,7 @@ public interface ProductRepository {
     Product getById(long id);
 
     void save(ProductEntity productEntity);
+
     Product getByName(String name);
 
     void deleteById(long id);

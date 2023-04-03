@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @Component
 @Slf4j
+// provide authentication
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private UserRepository userRepository;
@@ -28,26 +29,32 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         log.info("Start actual authentication.");
 
+        // get user information
         final String username = authentication.getName();
         final String password = authentication.getCredentials().toString();
         User user;
         Optional<UserEntity> userEntity = userRepository.findByUsername(username);
+
+        // get authenticating user
         if (userEntity.isPresent()) {
             user = userEntity.get().toUser();
         } else {
             throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "User not found!");
         }
 
+        // authorities --> authority, as project statement
         final List<GrantedAuthority> authority = List.of(new SimpleGrantedAuthority(user.getRole()));
+
+        // provide authentication
         final Authentication auth = new UsernamePasswordAuthenticationToken(username, password, authority);
 
         log.info("End actual authentication.");
-
         return auth;
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return false;
+        return (UsernamePasswordAuthenticationToken.class
+                .isAssignableFrom(authentication));
     }
 }

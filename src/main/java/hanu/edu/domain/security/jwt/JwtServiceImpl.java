@@ -41,26 +41,26 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public Key getKey() {
+    public Key getKey() { // generate private key
+        // if keygen process encode to hex string, then now use BASE64
         byte[] key = Decoders.BASE64.decode(jwtConfig.getSecret());
         return Keys.hmacShaKeyFor(key);
     }
 
     @Override
     public String generateToken(User user) {
+        // timestamp
         Instant now = Instant.now();
-        String role = user.getRole();
-
-        log.info("Roles: {} ", role);
-
+        // String role = user.getRole();
+        // log.info("Roles: {} ", role);
         return Jwts.builder()
                 .setSubject(user.getUsername())
-                .claim("authority", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-                .claim("role", role)
+                .claim("authority", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList())) // only 1 --> authority
+                .claim("role", user.getRole())
                 .claim("isEnable", user.isEnabled())
-                .setIssuedAt(Date.from(now))
-                .setExpiration(Date.from(now.plusSeconds(jwtConfig.getExpiration())))
-                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .setIssuedAt(Date.from(now)) // 0s
+                .setExpiration(Date.from(now.plusSeconds(jwtConfig.getExpiration()))) // + 3600s
+                .signWith(getKey(), SignatureAlgorithm.HS256) // data -hash-> hash -private-key-> digital signature
                 .compact();
     }
 
@@ -71,15 +71,20 @@ public class JwtServiceImpl implements JwtService {
         return !ObjectUtils.isEmpty(userDetails);
     }
 
-    private <T> T extractClaims(String token, Function<Claims, T> claimsTFunction) {
-        final Claims claims = extractAllClaims(token);
-        return claimsTFunction.apply(claims);
-    }
-
+    // extractAllClaims(token, claims -> username)
     private String extractUsername(String token) {
         return extractClaims(token, Claims::getSubject);
     }
 
+    // extract all claims, transform to any Object (not just Claims)
+    private <T> T extractClaims(String token, Function<Claims, T> claimsTFunction) {
+        final Claims claims = extractAllClaims(token);
+        // Function(claims) = T
+        return claimsTFunction.apply(claims);
+    }
+
+    // extract all claims
+    // why this method? to display errors in specific
     private Claims extractAllClaims(String token) {
         Claims claims;
 
@@ -92,14 +97,15 @@ public class JwtServiceImpl implements JwtService {
         } catch (ExpiredJwtException e) {
             throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "Token expiration");
         } catch (UnsupportedJwtException e) {
-            throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "Token not support");
+            throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "Token not supported");
         } catch (MalformedJwtException e) {
             throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "Invalid format 3 part of token");
         } catch (SignatureException e) {
-            throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "Invalid format token");
+            throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "Invalid format of token");
         } catch (Exception e) {
             throw new BaseException(String.valueOf(HttpStatus.UNAUTHORIZED.value()), e.getLocalizedMessage());
         }
         return claims;
     }
+
 }

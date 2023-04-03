@@ -1,9 +1,11 @@
 package hanu.edu.domain.customer.service;
 
 import hanu.edu.domain.customer.model.Customer;
+import hanu.edu.domain.user.model.User;
 import hanu.edu.domain.user.repository.UserRepository;
 import hanu.edu.domain.user.service.UserResourceService;
 import hanu.edu.infrastructure.customer.entity.CustomerEntity;
+import hanu.edu.infrastructure.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -24,7 +24,7 @@ public class GetItemsShoppingCartService {
     public List<OutputCart> getItem(long customerId) {
         ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
         List<OutputCart> outputCarts = new ArrayList<>();
-        for(Item i: cart.getItems()) {
+        for (Item i : cart.getItems()) {
             Product product = productRepository.getById(i.getProductId());
             OutputCart outputCart = OutputCart.builder()
                     .productId(product.getId())
@@ -40,6 +40,7 @@ public class GetItemsShoppingCartService {
         return outputCarts;
     }
 }
+
 @Builder
 @Getter
 class OutputCart {

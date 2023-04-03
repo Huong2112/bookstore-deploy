@@ -29,7 +29,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public Product getByName(String name) {
         ProductEntity productEntity = productJPARepository.findByName(name);
-        return productEntity == null? null: productEntity.toProduct();
+        return productEntity == null ? null : productEntity.toProduct();
     }
 
     @Override
