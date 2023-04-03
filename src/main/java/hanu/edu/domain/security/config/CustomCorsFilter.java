@@ -20,8 +20,10 @@ public class CustomCorsFilter implements Filter {
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
         httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
         if (HttpMethod.OPTIONS.name().equalsIgnoreCase(((HttpServletRequest) servletRequest).getMethod())) {
+            // if method request is allowed, then system will allow it
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         } else {
+            // ignore it
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }

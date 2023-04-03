@@ -11,7 +11,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,17 +32,20 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
     private final ObjectMapper objectMapper;
 
     public JwtUsernamePasswordAuthenticationFilter(AuthenticationManager manager, JwtConfig jwtConfig, JwtService jwtService) {
+        // for login attempt
         super(new AntPathRequestMatcher(jwtConfig.getUrl(), "POST"));
-        setAuthenticationManager(manager);
-        this.objectMapper = new ObjectMapper();
         this.jwtService = jwtService;
+        this.objectMapper = new ObjectMapper();
+        setAuthenticationManager(manager);
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         log.info("Start attempt to authentication.");
+        // map request data to LoginDTO
         LoginDTO loginDTO = objectMapper.readValue(request.getInputStream(), LoginDTO.class);
         log.info("End attempt to authentication.");
+        // authenticate user logging in
         return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword(), Collections.emptyList()));
     }
 
@@ -52,11 +54,15 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
         User user = (User) authentication.getPrincipal();
         String accessToken = jwtService.generateToken(user);
         Map map = new HashMap();
+
         map.put("accessToken", accessToken);
         map.put("userId", user.getId());
+
         String json = objectMapper.writeValueAsString(map);
+
         response.getWriter().write(json);
         response.setContentType("application/json; charset=UTF-8");
+
         log.info("End success authentication: {}", accessToken);
 
     }
@@ -66,10 +72,11 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
         BaseResponseDTO responseDTO = new BaseResponseDTO();
         responseDTO.setCode(String.valueOf(HttpStatus.UNAUTHORIZED.value()));
         responseDTO.setMessage(failed.getLocalizedMessage());
+
         String json = HelperUtils.JSON_WRITER.writeValueAsString(responseDTO);
+
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json; charset=UTF-8");
         response.getWriter().write(json);
-        return;
     }
 }

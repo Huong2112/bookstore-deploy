@@ -42,6 +42,6 @@ public class ProductResourceController {
 
     @GetMapping("/admin/product/{page}/{totalPage}")
     public ResponseEntity<?> getAll(@PathVariable int page, @PathVariable int totalPage) {
-        return new ResponseEntity<>(productResourceService.getAllByPage(page, totalPage),HttpStatus.OK);
+        return new ResponseEntity<>(productResourceService.getAllByPage(page, totalPage), HttpStatus.OK);
     }
 }

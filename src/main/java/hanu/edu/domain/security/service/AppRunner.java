@@ -10,6 +10,9 @@ public class AppRunner implements CommandLineRunner {
     private SecurityService securityService;
 
     @Override
+    /**
+     * @effects create admin if he hasn't existed
+     */
     public void run(String... args) {
         securityService.generateUsersRoles();
     }

@@ -18,11 +18,12 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         BaseResponseDTO responseDTO = new BaseResponseDTO();
         responseDTO.setMessage("Access denied!");
         responseDTO.setCode(String.valueOf(HttpStatus.FORBIDDEN.value()));
-
+        // convert the BaseResponseDTO object into a String value of application/json
         String json = HelperUtils.JSON_WRITER.writeValueAsString(responseDTO);
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        // sends response back to the client
         response.getWriter().write(json);
     }
 }
