@@ -17,7 +17,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Autowired
     private ProductJPARepository productJPARepository;
-
     @Override
     public Product getById(long id) {
         Optional<ProductEntity> product = productJPARepository.findById(id);

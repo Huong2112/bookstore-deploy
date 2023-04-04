@@ -23,4 +23,5 @@ public class UserRepositoryImpl implements UserRepository {
         return userJPARepository.findByUsername(username);
     }
 
+
 }

@@ -10,4 +10,5 @@ public interface UserRepository {
 
     Optional<UserEntity> findByUsername(String username);
 
+
 }
