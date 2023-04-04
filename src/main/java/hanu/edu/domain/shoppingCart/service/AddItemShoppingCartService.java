@@ -24,7 +24,7 @@ public class AddItemShoppingCartService {
         boolean inCart = false;
         for (Item i : items) {
             if (i.getProductId() == item.getProductId()) {
-                i.setQuantity(item.getQuantity());
+                i.setQuantity(item.getQuantity() + i.getQuantity());
                 itemRepository.save(i);
                 inCart = true;
                 break;
