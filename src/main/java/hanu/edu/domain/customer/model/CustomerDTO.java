@@ -28,9 +28,5 @@ public class CustomerDTO {
     @Pattern(regexp = "[0-9]{10}", message = "Invalid phone number.")
     private String phone;
 
-    public String setPassword(String password) {
-        return this.password;
-    }
-
 
 }

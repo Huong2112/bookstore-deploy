@@ -9,6 +9,7 @@ import hanu.edu.infrastructure.customer.entity.CustomerEntity;
 import hanu.edu.infrastructure.user.entity.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 //CRUD methods
@@ -21,11 +22,16 @@ public class CustomerResourceService extends UserResourceService {
     @Autowired
     private CustomerRepository customerRepository;
 
+
+    @Autowired
+    BCryptPasswordEncoder encoder;
+
     public void create(Customer customer) {
         userRepository.save(CustomerEntity.toEntity(customer));
     }
 
     public void update(Customer customer) {
+        customer.setPassword(encoder.encode(customer.getPassword()));
         customerRepository.save(CustomerEntity.toEntity(customer));
     }
 
