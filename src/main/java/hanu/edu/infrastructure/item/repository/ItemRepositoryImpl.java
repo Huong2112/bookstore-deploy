@@ -28,4 +28,9 @@ public class ItemRepositoryImpl implements ItemRepository {
     public void deleteByItemId(long itemId) {
         itemJPARepository.deleteByItemId(itemId);
     }
+
+    @Override
+    public Item getByItemId(long itemId) {
+        return itemJPARepository.findById(itemId).get().toItem();
+    }
 }

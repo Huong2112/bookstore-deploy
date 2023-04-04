@@ -10,4 +10,5 @@ public interface ItemRepository {
     public List<Item> getByProductId(long productId);
 
     void deleteByItemId(long itemId);
+    Item getByItemId(long itemId);
 }

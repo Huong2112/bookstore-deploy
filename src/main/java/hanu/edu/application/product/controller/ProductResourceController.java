@@ -40,8 +40,13 @@ public class ProductResourceController {
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
-    @GetMapping("/admin/product/{page}/{totalPage}")
-    public ResponseEntity<?> getAll(@PathVariable int page, @PathVariable int totalPage) {
-        return new ResponseEntity<>(productResourceService.getAllByPage(page, totalPage), HttpStatus.OK);
+    @GetMapping("/admin/product/{page}")
+    public ResponseEntity<?> getAll(@PathVariable int page) {
+        return new ResponseEntity<>(productResourceService.getAllByPage(page), HttpStatus.OK);
+    }
+
+    @GetMapping("/product/{category}/{page}")
+    public ResponseEntity<?> getByCategory(@PathVariable String category, @PathVariable int page) {
+        return new ResponseEntity<>(productResourceService.getAllByCategory(page, category), HttpStatus.OK);
     }
 }

@@ -34,7 +34,11 @@ public class ProductResourceService {
         productRepository.deleteById(id);
     }
 
-    public Page<Product> getAllByPage(int page, int totalPage) {
-        return productRepository.getAllProductsByPage(page, totalPage);
+    public Page<Product> getAllByPage(int page) {
+        return productRepository.getAllProductsByPage(page, 20);
+    }
+
+    public Page<Product> getAllByCategory(int page, String category) {
+        return productRepository.getProductByCategory(page, 20, category);
     }
 }

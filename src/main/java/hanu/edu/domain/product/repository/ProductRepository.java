@@ -18,4 +18,6 @@ public interface ProductRepository {
     Page<Product> searchProductsByName(int page, int size, String name);
 
     Page<Product> sortProductsBy(int page, int size, String direction, String... properties);
+
+    Page<Product> getProductByCategory(int page, int size, String category);
 }
