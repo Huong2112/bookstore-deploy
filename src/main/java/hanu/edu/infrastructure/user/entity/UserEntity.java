@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.NaturalId;
 
@@ -16,13 +17,14 @@ import org.hibernate.annotations.NaturalId;
 @AllArgsConstructor
 @SuperBuilder
 @Getter
+@Setter
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NaturalId
+    @NaturalId(mutable = true)
     private String username;
-    @NaturalId
+    @NaturalId(mutable = true)
     private String email;
     private String password;
     private boolean enabled;
@@ -38,6 +40,7 @@ public class UserEntity {
         this.password = password;
         this.email = email;
     }
+
 
     public static UserEntity toEntity(User user) {
         return UserEntity.builder()
