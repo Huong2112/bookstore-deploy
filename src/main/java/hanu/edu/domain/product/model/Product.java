@@ -1,5 +1,8 @@
 package hanu.edu.domain.product.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Product {
+
     private long id;
     private String name;
     private double price;
