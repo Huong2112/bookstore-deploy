@@ -31,13 +31,13 @@ public class CustomerResourceController {
 
     @PutMapping("/customer/{customerId}")
     public ResponseEntity<String> updateCustomer(@PathVariable long customerId, @Validated @RequestBody CustomerDTO customerDTO) {
-        customerResourceService.update(new Customer(customerId, customerDTO.getUsername(), customerDTO.getEmail(), customerDTO.getPassword(), customerDTO.getAddress(), customerDTO.getPhone(), customerDTO.getAvatar()));
+        customerResourceService.update(new Customer(customerId, customerDTO.getUsername(), customerDTO.getEmail(), customerDTO.getPassword(), customerDTO.getAddress(), customerDTO.getPhone(), customerDTO.getAge(), customerDTO.getAvatar()));
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
-    @DeleteMapping("/customer/{customerId}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable long customerId) {
-        customerResourceService.deleteById(customerId);
-        return new ResponseEntity<>("Success", HttpStatus.OK);
-    }
+//    @DeleteMapping("/customer/{customerId}")
+//    public ResponseEntity<String> deleteCustomer(@PathVariable long customerId) {
+//        customerResourceService.deleteById(customerId);
+//        return new ResponseEntity<>("Success", HttpStatus.OK);
+//    }
 }

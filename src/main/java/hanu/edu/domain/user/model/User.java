@@ -1,9 +1,12 @@
 package hanu.edu.domain.user.model;
 
+import hanu.edu.domain.customer.model.Customer;
+import hanu.edu.infrastructure.customer.entity.CustomerEntity;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -36,13 +40,14 @@ public class User implements UserDetails {
     @Pattern(regexp = "[0-9]{10}", message = "Invalid phone number.")
     private String phone = "0123456789";
 
-    public User(long id, String username, String email, String password, String address, String phone, String avatar) {
+    public User(long id, String username, String email, String password, String address, String phone, int age, String avatar) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.address = address;
         this.phone = phone;
+        this.age = age;
         this.avatar = avatar;
     }
 
@@ -102,16 +107,5 @@ public class User implements UserDetails {
     public void setId(long id) {
         this.id = id;
     }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    
 }

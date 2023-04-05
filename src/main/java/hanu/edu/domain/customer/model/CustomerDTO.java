@@ -28,5 +28,9 @@ public class CustomerDTO {
     @Pattern(regexp = "[0-9]{10}", message = "Invalid phone number.")
     private String phone;
 
+    @Min(value = 10, message = "Age should not be less than 10.")
+    @Max(value = 80, message = "Age should not be greater than 80.")
+    private int age;
+
 
 }

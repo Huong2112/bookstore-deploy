@@ -13,8 +13,8 @@ public class Customer extends User {
         super(id, username, email, password, enabled, role, name, age, address, avatar, phone);
     }
 
-    public Customer(long id, String username, String email, String password, String address, String phone, String avatar) {
-    super(id, username, email, password, address, phone, avatar);
+    public Customer(long id, String username, String email, String password, String address, String phone, int age, String avatar) {
+    super(id, username, email, password, address, phone, age, avatar);
     }
 
 }

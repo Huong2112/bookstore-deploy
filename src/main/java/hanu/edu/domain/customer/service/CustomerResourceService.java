@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 //CRUD methods
 @Service
 public class CustomerResourceService extends UserResourceService {
@@ -31,11 +34,16 @@ public class CustomerResourceService extends UserResourceService {
     }
 
     public void update(Customer customer) {
-        customer.setPassword(encoder.encode(customer.getPassword()));
-        customerRepository.save(CustomerEntity.toEntity(customer));
+
+        boolean status = false;
+        while (!status) {
+            customer.setPassword(encoder.encode(customer.getPassword()));
+            customerRepository.save(CustomerEntity.toEntity(customer));
+            break;
+        }
     }
 
-    public void deleteById(long customerId) {
-        customerRepository.deleteById(customerId);
-    }
+//    public void deleteById(long customerId) {
+//        customerRepository.deleteById(customerId);
+//    }
 }
