@@ -10,15 +10,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
     @Autowired
     private ProductJPARepository productJPARepository;
-
     @Override
     public Product getById(long id) {
-        return productJPARepository.findById(id).orElseThrow().toProduct();
+        Optional<ProductEntity> product = productJPARepository.findById(id);
+        return product.isEmpty() ? null : product.get().toProduct();
     }
 
     @Override
@@ -60,5 +62,11 @@ public class ProductRepositoryImpl implements ProductRepository {
             pageRequest = PageRequest.of(page, size, Sort.DEFAULT_DIRECTION, properties);
         }
         return productJPARepository.findAll(pageRequest).map(ProductEntity::toProduct);
+    }
+
+    @Override
+    public Page<Product> getProductByCategory(int page, int size, String category) {
+        Pageable pageRequest = PageRequest.of(page, size);
+        return productJPARepository.findAllByCategoryContaining(category, pageRequest).map(ProductEntity::toProduct);
     }
 }

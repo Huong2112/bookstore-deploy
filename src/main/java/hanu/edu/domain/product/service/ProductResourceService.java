@@ -6,6 +6,7 @@ import hanu.edu.domain.security.exception.BaseException;
 import hanu.edu.infrastructure.product.entity.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 //CRUD methods
@@ -34,7 +35,11 @@ public class ProductResourceService {
         productRepository.deleteById(id);
     }
 
-    public Page<Product> getAllByPage(int page, int totalPage) {
-        return productRepository.getAllProductsByPage(page, totalPage);
+    public Page<Product> getAllByPage(int page) {
+        return productRepository.getAllProductsByPage(page, 20);
+    }
+
+    public Page<Product> getAllByCategory(int page, String category) {
+        return productRepository.getProductByCategory(page, 20, category);
     }
 }

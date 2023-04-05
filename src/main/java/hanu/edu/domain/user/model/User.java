@@ -36,6 +36,22 @@ public class User implements UserDetails {
     @Pattern(regexp = "[0-9]{10}", message = "Invalid phone number.")
     private String phone = "0123456789";
 
+    public User(long id, String username, String email, String password, String address, String phone, String avatar) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.phone = phone;
+        this.avatar = avatar;
+    }
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
@@ -81,5 +97,21 @@ public class User implements UserDetails {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

@@ -20,4 +20,17 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public Customer getByEmail(String email) {
         return customerJPARepository.findByEmail(email).toCustomer();
     }
+
+
+    @Override
+    public void deleteById(long id) {
+        customerJPARepository.deleteById(id);
+    }
+
+    @Override
+    public void save(CustomerEntity customerEntity) {
+        customerJPARepository.save(customerEntity);
+    }
+
+
 }
