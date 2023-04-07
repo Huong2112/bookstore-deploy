@@ -54,10 +54,9 @@ public class JwtUsernamePasswordAuthenticationFilter extends AbstractAuthenticat
         User user = (User) authentication.getPrincipal();
         String accessToken = jwtService.generateToken(user);
         Map map = new HashMap();
-
         map.put("accessToken", accessToken);
         map.put("userId", user.getId());
-
+        map.put("role", user.getRole());
         String json = objectMapper.writeValueAsString(map);
 
         response.getWriter().write(json);

@@ -1,6 +1,4 @@
 package hanu.edu.domain.shoppingCart.model;
-
-import hanu.edu.domain.item.model.Item;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

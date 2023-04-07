@@ -18,6 +18,7 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     @Override
     public ShoppingCart getByCustomerId(long customerId) {
-        return shoppingCartJPARepository.findByCustomerId(customerId).toShoppingCart();
+        ShoppingCartEntity shoppingCartEntity = shoppingCartJPARepository.findByCustomerId(customerId);
+        return shoppingCartEntity == null ? null : shoppingCartEntity.toShoppingCart();
     }
 }

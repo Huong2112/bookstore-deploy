@@ -4,16 +4,17 @@ import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.model.ProductDTO;
 import hanu.edu.domain.product.service.ProductResourceService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor
 public class ProductResourceController {
 
-    @Autowired
-    private ProductResourceService productResourceService;
+    private final ProductResourceService productResourceService;
 
     @PostMapping("/admin/product")
     public ResponseEntity<String> create(@RequestBody ProductDTO productDTO) {
@@ -23,8 +24,8 @@ public class ProductResourceController {
     }
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<?> getById(@PathVariable long id) {
-        return new ResponseEntity<>(productResourceService.getById(id), HttpStatus.OK);
+    public Product getById(@PathVariable long id) {
+        return productResourceService.getById(id);
     }
 
     @DeleteMapping("/admin/product/{id}")

@@ -1,9 +1,8 @@
 package hanu.edu.domain.shoppingCart.service;
 
-import hanu.edu.domain.item.model.Item;
-import hanu.edu.domain.item.repository.ItemRepository;
 import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.repository.ProductRepository;
+import hanu.edu.domain.shoppingCart.model.Item;
 import hanu.edu.domain.shoppingCart.model.ShoppingCart;
 import hanu.edu.domain.shoppingCart.repository.ShoppingCartRepository;
 import jakarta.transaction.Transactional;
@@ -17,8 +16,6 @@ import java.util.List;
 
 @Service
 public class ItemResourceShoppingCartService {
-    @Autowired
-    private ItemRepository itemRepository;
 
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
@@ -30,20 +27,25 @@ public class ItemResourceShoppingCartService {
         ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
         List<Item> items = cart.getItems();
         boolean inCart = false;
-        for (Item i : items) {
-            if (i.getProductId() == item.getProductId()) {
-                i.setQuantity(item.getQuantity() + i.getQuantity());
-                itemRepository.save(i);
-                inCart = true;
-                break;
+        if (items != null) {
+            for (Item i : items) {
+                if (i.getProductId() == item.getProductId()) {
+                    i.setQuantity(item.getQuantity() + i.getQuantity());
+                    inCart = true;
+                    break;
+                }
             }
-        }
-        if (!inCart) {
+            if (!inCart) {
+                items.add(item);
+            }
+        } else {
+            items = new ArrayList<>();
             items.add(item);
         }
         cart.setItems(items);
         shoppingCartRepository.save(cart);
     }
+
     @Transactional
     public void deleteItem(long productId, long customerId) {
         ShoppingCart shoppingCart = shoppingCartRepository.getByCustomerId(customerId);
@@ -53,7 +55,6 @@ public class ItemResourceShoppingCartService {
                 if (i.getProductId() == productId) {
                     items.remove(i);
                     shoppingCart.setItems(items);
-                    itemRepository.deleteByItemId(i.getItemId());
                     shoppingCartRepository.save(shoppingCart);
                     break;
                 }
@@ -61,14 +62,28 @@ public class ItemResourceShoppingCartService {
         }
     }
 
-    public List<OutputCart> getItem(long customerId) {
+    public void updateItem(long customerId, long productId, long quantity) {
+        ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
+        List<Item> items = cart.getItems();
+        if(items != null) {
+            for(Item i: items) {
+                if(i.getProductId() == productId) {
+                    i.setQuantity(quantity);
+                    cart.setItems(items);
+                    shoppingCartRepository.save(cart);
+                    break;
+                }
+            }
+        }
+    }
+
+    public List<OutputCart> getItems(long customerId) {
         ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
         List<OutputCart> outputCarts = new ArrayList<>();
         for (Item i : cart.getItems()) {
             Product product = productRepository.getById(i.getProductId());
-            if(product != null) {
+            if (product != null) {
                 OutputCart outputCart = OutputCart.builder()
-                        .itemId(i.getItemId())
                         .productId(product.getId())
                         .description(product.getDescription())
                         .name(product.getName())
@@ -87,7 +102,6 @@ public class ItemResourceShoppingCartService {
 @Builder
 @Getter
 class OutputCart {
-    private long itemId;
     private long quantity;
     private long productId;
     private String name;

@@ -1,8 +1,11 @@
 package hanu.edu.domain.security.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import java.lang.reflect.Field;
 
@@ -11,8 +14,13 @@ import java.lang.reflect.Field;
 @NoArgsConstructor
 // Request
 public class UserDTO {
+    @NotNull
     private String username;
+    @NotNull
+    @Length(min = 6, message = "Password must be at least 6 characters")
     private String password;
+    @Email
+    @NotNull
     private String email;
 
     /**
