@@ -78,7 +78,7 @@ public class WebSecurityConfig {
         AuthenticationManager manager = builder.build();
         http.authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                         .requestMatchers("/cart/**").hasAuthority("ROLE_CUSTOMER")
+                        .requestMatchers("/cart/**").hasAuthority("ROLE_CUSTOMER")
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/register", "/login**", "/login", "/", "/search", "/**", "/product").permitAll()
                         .anyRequest().authenticated()
@@ -86,7 +86,6 @@ public class WebSecurityConfig {
                 .httpBasic(withDefaults())
                 .cors(withDefaults())
                 .csrf().disable()
-
                 .headers().frameOptions().sameOrigin()
                 .and().authenticationManager(manager) // set authentication manager
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -100,6 +99,7 @@ public class WebSecurityConfig {
                 .addFilterBefore(new JwtUsernamePasswordAuthenticationFilter(manager, jwtConfig(), jwtService()), UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig(), jwtService()), UsernamePasswordAuthenticationFilter.class)
                 .logout()
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .permitAll();

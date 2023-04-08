@@ -53,7 +53,7 @@ public class SecurityServiceImpl implements SecurityService {
             shoppingCartRepository.save(new ShoppingCart(customerFromDB.getId(), null));
             response.setCode(String.valueOf(HttpStatus.CREATED.value()));
             response.setMessage("Register account successfully!");
-        // lost connection :v
+            // lost connection :v
         } catch (Exception e) {
             response.setCode(String.valueOf(HttpStatus.SERVICE_UNAVAILABLE.value()));
             response.setMessage("Service unavailable!");

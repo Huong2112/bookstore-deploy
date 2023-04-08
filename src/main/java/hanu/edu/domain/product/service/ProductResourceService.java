@@ -5,9 +5,7 @@ import hanu.edu.domain.product.repository.ProductRepository;
 import hanu.edu.domain.security.exception.BaseException;
 import hanu.edu.infrastructure.product.entity.ProductEntity;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 //CRUD methods

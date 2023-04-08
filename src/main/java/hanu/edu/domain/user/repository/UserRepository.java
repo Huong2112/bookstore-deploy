@@ -1,6 +1,5 @@
 package hanu.edu.domain.user.repository;
 
-import hanu.edu.domain.customer.model.Customer;
 import hanu.edu.domain.user.model.User;
 import hanu.edu.infrastructure.user.entity.UserEntity;
 

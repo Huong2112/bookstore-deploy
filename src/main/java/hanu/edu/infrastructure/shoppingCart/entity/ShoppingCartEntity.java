@@ -43,10 +43,11 @@ public class ShoppingCartEntity {
 
     public ShoppingCart toShoppingCart() {
         try {
-            if(items == null || items.length() == 0) {
+            if (items == null || items.length() == 0) {
                 return new ShoppingCart(customerId, null);
             } else {
-                return new ShoppingCart(customerId, new ObjectMapper().readValue(items, new TypeReference<List<Item>>(){}));
+                return new ShoppingCart(customerId, new ObjectMapper().readValue(items, new TypeReference<List<Item>>() {
+                }));
             }
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

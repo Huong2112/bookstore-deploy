@@ -65,9 +65,9 @@ public class ItemResourceShoppingCartService {
     public void updateItem(long customerId, long productId, long quantity) {
         ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
         List<Item> items = cart.getItems();
-        if(items != null) {
-            for(Item i: items) {
-                if(i.getProductId() == productId) {
+        if (items != null) {
+            for (Item i : items) {
+                if (i.getProductId() == productId) {
                     i.setQuantity(quantity);
                     cart.setItems(items);
                     shoppingCartRepository.save(cart);

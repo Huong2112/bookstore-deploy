@@ -1,12 +1,9 @@
 package hanu.edu.domain.user.model;
 
-import hanu.edu.domain.customer.model.Customer;
-import hanu.edu.infrastructure.customer.entity.CustomerEntity;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -107,5 +103,5 @@ public class User implements UserDetails {
     public void setId(long id) {
         this.id = id;
     }
-    
+
 }

@@ -17,6 +17,7 @@ public class CustomerResourceController {
 
     @Autowired
     private CustomerResourceService customerResourceService;
+
     @GetMapping("/account")
     public Customer getCustomerAccount() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

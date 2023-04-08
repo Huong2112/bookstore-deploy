@@ -27,7 +27,9 @@ public class UserEntity {
     @NaturalId(mutable = true)
     private String email;
     private String password;
+    @Setter
     private boolean enabled;
+    @Setter
     private String role;
     private String name;
     private int age;
@@ -58,13 +60,5 @@ public class UserEntity {
 
     public User toUser() {
         return new User(id, username, email, password, enabled, role, name, age, address, avatar, phone);
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 }
