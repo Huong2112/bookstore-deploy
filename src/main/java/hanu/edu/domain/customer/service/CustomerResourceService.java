@@ -9,12 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+
 //CRUD methods
 @Service
 public class CustomerResourceService extends UserResourceService {
 
     @Autowired
     BCryptPasswordEncoder encoder;
+
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -25,16 +32,25 @@ public class CustomerResourceService extends UserResourceService {
     }
 
     public void update(Customer customer) {
-
-        boolean status = false;
-        while (!status) {
-            customer.setPassword(encoder.encode(customer.getPassword()));
-            customerRepository.save(CustomerEntity.toEntity(customer));
-            break;
-        }
+        customer.setPassword(encoder.encode(customer.getPassword()));
+        customerRepository.save(CustomerEntity.toEntity(customer).toCustomer());
     }
+
+    public Customer getById(long customerId) {
+        int passwordLength = customerRepository.getById(customerId).getPassword().length();
+        String password = customerRepository.getById(customerId).getPassword();
+        char[] chars = password.toCharArray();
+        for (char decoderPass: chars) {
+            decoderPass -= passwordLength;
+            customerRepository.getById(customerId).setPassword(String.valueOf(decoderPass));
+        }
+        return customerRepository.getById(customerId);
+    }
+
+
 
 //    public void deleteById(long customerId) {
 //        customerRepository.deleteById(customerId);
 //    }
+
 }
