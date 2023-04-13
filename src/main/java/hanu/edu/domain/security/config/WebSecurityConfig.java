@@ -80,7 +80,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/cart/**").hasAuthority("ROLE_CUSTOMER")
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/register", "/login**", "/login", "/", "/search", "/**", "/product").permitAll()
+                        .requestMatchers("/register", "/login**", "/login",
+                                                 "/product/**", "/", "/search", "/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(withDefaults())
