@@ -17,16 +17,20 @@ public class ProductPagingAndSortingController {
     private ProductPagingAndSortingService productPagingAndSortingService;
 
     @GetMapping({"/{pageNo}", "/"})
-    public Page<Product> getProductsBy(@PathVariable(name = "pageNo") Optional<Integer> pageNo, @PathParam("direction") String direction, @PathParam("price") boolean price) {
+    public Page<Product> getProductsBy(@PathVariable(name = "pageNo") Optional<Integer> pageNo, @PathParam("direction") String direction,
+                                       @PathParam("price") boolean price, @PathParam("name") boolean name, @PathParam("category") boolean category, @PathParam("inStock") boolean inStock) {
         int page;
         if (!pageNo.isPresent()) page = 0;
         else page = pageNo.get();
-        if (price == true && direction != null && !direction.isEmpty()) {
+        if (direction == null || direction.isEmpty()) direction = "asc";
+        if (price == true) {
             return productPagingAndSortingService.sortProductsBy(page, 20, direction, "price");
-        } else if (price == true) {
-            return productPagingAndSortingService.sortProductsBy(page, 20, "asc", "price");
-        } else if (direction != null && !direction.isEmpty()) {
+        } else if (name == true) {
             return productPagingAndSortingService.sortProductsBy(page, 20, direction, "name");
+        } else if (category == true) {
+            return productPagingAndSortingService.sortProductsBy(page, 20, direction, "category");
+        } else if (inStock == true) {
+            return productPagingAndSortingService.sortProductsBy(page, 20, direction, "inStock");
         } else {
             return productPagingAndSortingService.getAllProductsByPage(page, 20);
         }
