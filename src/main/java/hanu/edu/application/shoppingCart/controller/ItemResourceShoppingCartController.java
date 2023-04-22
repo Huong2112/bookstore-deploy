@@ -35,4 +35,8 @@ public class ItemResourceShoppingCartController {
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
+    @GetMapping("/cart/count/{customerId}")
+    public int countItem(@PathVariable long customerId) {
+        return itemResourceShoppingCartService.countItems(customerId);
+    }
 }

@@ -97,6 +97,11 @@ public class ItemResourceShoppingCartService {
         }
         return outputCarts;
     }
+
+    public int countItems(long customerId) {
+        ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
+        return cart.getItems().size();
+    }
 }
 
 @Builder
