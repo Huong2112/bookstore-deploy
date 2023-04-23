@@ -1,15 +1,17 @@
 package hanu.edu.infrastructure.shoppingCart.entity;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import hanu.edu.domain.shoppingCart.model.Item;
 import hanu.edu.domain.shoppingCart.model.ShoppingCart;
 import hanu.edu.infrastructure.customer.entity.CustomerEntity;
-import hanu.edu.infrastructure.item.entity.ItemEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "shopping_cart")
@@ -20,25 +22,35 @@ public class ShoppingCartEntity {
     @Id
     private long customerId;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "shopping_cart_item",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id"))
-    private List<ItemEntity> itemEntities;
+    @Column(name = "items", columnDefinition = "TEXT")
+    private String items;
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "customerId")
     private CustomerEntity customerEntity;
 
     public static ShoppingCartEntity toEntity(ShoppingCart shoppingCart) {
-        return ShoppingCartEntity.builder()
-                .customerId(shoppingCart.getCustomerId())
-                .itemEntities(shoppingCart.getItems() == null ? null :
-                        shoppingCart.getItems().stream().map(ItemEntity::toEntity).collect(Collectors.toList()))
-                .build();
+        try {
+            return ShoppingCartEntity.builder()
+                    .customerId(shoppingCart.getCustomerId())
+                    .items(shoppingCart.getItems() == null ? null :
+                            new ObjectMapper().writeValueAsString(shoppingCart.getItems()))
+                    .build();
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public ShoppingCart toShoppingCart() {
-        return new ShoppingCart(customerId, itemEntities.stream().map(ItemEntity::toItem).collect(Collectors.toList()));
+        try {
+            if (items == null || items.length() == 0) {
+                return new ShoppingCart(customerId, null);
+            } else {
+                return new ShoppingCart(customerId, new ObjectMapper().readValue(items, new TypeReference<List<Item>>() {
+                }));
+            }
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

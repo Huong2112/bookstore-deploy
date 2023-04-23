@@ -1,7 +1,5 @@
 package hanu.edu.infrastructure.user.repository;
 
-import hanu.edu.domain.customer.model.Customer;
-import hanu.edu.domain.user.model.User;
 import hanu.edu.domain.user.repository.UserRepository;
 import hanu.edu.infrastructure.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +20,6 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<UserEntity> findByUsername(String username) {
         return userJPARepository.findByUsername(username);
-    }
-
-    @Override
-    public User getByCustomerId(long id) {
-        return userJPARepository.findById(id).toUser();
     }
 
 

@@ -4,16 +4,16 @@ import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.repository.ProductRepository;
 import hanu.edu.domain.security.exception.BaseException;
 import hanu.edu.infrastructure.product.entity.ProductEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 //CRUD methods
 @Service
+@AllArgsConstructor
 public class ProductResourceService {
-    @Autowired
-    private ProductRepository productRepository;
+
+    private final ProductRepository productRepository;
 
     public void create(Product product) {
         Product productFromDB = productRepository.getByName(product.getName());

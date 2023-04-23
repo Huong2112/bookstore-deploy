@@ -21,6 +21,7 @@ public class ProductEntity {
     @Column(unique = true)
     private String name;
     private double price;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private long inStock;
     private String images;

@@ -3,13 +3,16 @@ package hanu.edu.application.customer.controller;
 import hanu.edu.domain.customer.model.Customer;
 import hanu.edu.domain.customer.model.CustomerDTO;
 import hanu.edu.domain.customer.service.CustomerResourceService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.crypto.NoSuchPaddingException;
+import java.security.NoSuchAlgorithmException;
 
 
 @RestController
@@ -17,6 +20,7 @@ public class CustomerResourceController {
 
     @Autowired
     private CustomerResourceService customerResourceService;
+
     @GetMapping("/account")
     public Customer getCustomerAccount() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -28,9 +32,14 @@ public class CustomerResourceController {
         }
         return (Customer) customerResourceService.getByUsername(username).get();
     }
+    @GetMapping("/customer/{customerId}")
+    public Customer getCustomerAccount(@PathVariable long customerId) {
+
+        return customerResourceService.getById(customerId);
+    }
 
     @PutMapping("/customer/{customerId}")
-    public ResponseEntity<String> updateCustomer(@PathVariable long customerId, @Validated @RequestBody CustomerDTO customerDTO) {
+    public ResponseEntity<String> updateCustomer(@PathVariable long customerId, @Valid @RequestBody CustomerDTO customerDTO) {
         customerResourceService.update(new Customer(customerId, customerDTO.getUsername(), customerDTO.getEmail(), customerDTO.getPassword(), customerDTO.getAddress(), customerDTO.getPhone(), customerDTO.getAge(), customerDTO.getAvatar()));
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }

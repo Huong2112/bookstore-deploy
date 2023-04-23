@@ -3,7 +3,7 @@ package hanu.edu.infrastructure.product.repository;
 import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.repository.ProductRepository;
 import hanu.edu.infrastructure.product.entity.ProductEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,10 +13,11 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
+@AllArgsConstructor
 public class ProductRepositoryImpl implements ProductRepository {
 
-    @Autowired
-    private ProductJPARepository productJPARepository;
+    private final ProductJPARepository productJPARepository;
+
     @Override
     public Product getById(long id) {
         Optional<ProductEntity> product = productJPARepository.findById(id);
