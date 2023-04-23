@@ -35,7 +35,6 @@ public class OrderEntity {
     private String paymentMethod;
     private String messageOfCustomer;
     private String addressToReceive;
-
     @Column(columnDefinition = "TEXT")
     private String customerInfo;
 
