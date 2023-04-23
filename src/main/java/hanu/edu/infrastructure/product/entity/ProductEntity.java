@@ -27,6 +27,7 @@ public class ProductEntity {
     private String images;
     private String category;
 
+
     public static ProductEntity toEntity(Product product) {
         return ProductEntity.builder()
                 .id(product.getId())
