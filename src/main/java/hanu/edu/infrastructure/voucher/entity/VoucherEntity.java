@@ -1,18 +1,16 @@
 package hanu.edu.infrastructure.voucher.entity;
 
-import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.voucher.model.Voucher;
-import hanu.edu.infrastructure.product.entity.ProductEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Entity(name = "voucher")
 @Builder

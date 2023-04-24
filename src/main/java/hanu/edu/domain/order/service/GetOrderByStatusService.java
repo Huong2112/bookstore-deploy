@@ -2,16 +2,13 @@ package hanu.edu.domain.order.service;
 
 import hanu.edu.domain.order.model.Order;
 import hanu.edu.domain.order.model.OrderStatus;
-import hanu.edu.domain.order.model.PaymentMethod;
 import hanu.edu.domain.order.repository.OrderRepository;
 import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.repository.ProductRepository;
 import hanu.edu.domain.security.exception.BaseException;
 import hanu.edu.domain.shoppingCart.model.Item;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,17 +27,17 @@ public class GetOrderByStatusService {
 
     public List<OutputOrder> getOrderByStatus(String status) {
         List<Order> orders = orderRepository.getByOrderStatus(OrderStatus.of(status));
-        if(orders == null) {
+        if (orders == null) {
             throw new BaseException("404", "No order found");
         }
         List<OutputOrder> outputOrderList = new ArrayList<>();
         double total = 0;
-        for(Order order: orders) {
+        for (Order order : orders) {
             List<OutputItemDetail> itemDetailList = new ArrayList<>();
             List<Item> items = order.getItems();
-            for(Item item: items) {
+            for (Item item : items) {
                 Product product = productRepository.getById(item.getProductId());
-                if(product != null) {
+                if (product != null) {
                     OutputItemDetail outputItemDetail = new OutputItemDetail(product.getId(), product.getName(), product.getPrice(),
                             product.getImages(), item.getQuantity(), product.getCategory());
                     total += product.getPrice() * item.getQuantity();

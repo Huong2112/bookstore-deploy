@@ -1,7 +1,5 @@
 package hanu.edu.domain.product.model;
 
-import hanu.edu.domain.discount.model.Discount;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,5 +39,9 @@ public class Product {
         this.images = images;
         this.category = category;
         this.discount = discount;
+    }
+
+    public double getCurrentPrice() {
+        return price - price * discount / 100;
     }
 }

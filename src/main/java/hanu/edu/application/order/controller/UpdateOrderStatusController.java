@@ -1,12 +1,14 @@
 package hanu.edu.application.order.controller;
 
-import hanu.edu.domain.order.model.OrderStatus;
 import hanu.edu.domain.order.service.UpdateStatusOrderService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UpdateOrderStatusController {
