@@ -18,7 +18,7 @@ public class ProductResourceService {
     public void create(Product product) {
         Product productFromDB = productRepository.getByName(product.getName());
         if (productFromDB != null) {
-            throw new BaseException("500", "Duplicate name");
+            throw new BaseException("500", "Duplicate name!");
         }
         productRepository.save(ProductEntity.toEntity(product));
     }

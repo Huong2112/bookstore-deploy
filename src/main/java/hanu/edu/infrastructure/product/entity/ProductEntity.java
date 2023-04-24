@@ -26,7 +26,7 @@ public class ProductEntity {
     private long inStock;
     private String images;
     private String category;
-
+    private int discount;
 
     public static ProductEntity toEntity(Product product) {
         return ProductEntity.builder()
@@ -36,7 +36,9 @@ public class ProductEntity {
                 .description(product.getDescription())
                 .inStock(product.getInStock())
                 .images(product.getImages() == null ? null : imagesToString(product.getImages()))
-                .category(product.getCategory()).build();
+                .category(product.getCategory())
+                .discount(product.getDiscount())
+                .build();
     }
 
     public static String imagesToString(List<String> images) {
@@ -58,6 +60,6 @@ public class ProductEntity {
             String[] imageArray = images.split(" ");
             Collections.addAll(imageList, imageArray);
         }
-        return new Product(id, name, price, description, inStock, imageList, category);
+        return new Product(id, name, price, description, inStock, imageList, category, discount);
     }
 }
