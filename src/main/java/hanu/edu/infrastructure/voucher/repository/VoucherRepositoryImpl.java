@@ -36,4 +36,5 @@ public class VoucherRepositoryImpl implements VoucherRepository {
         VoucherEntity voucherEntity = voucherJPARepository.findByTitle(title);
         return voucherEntity == null ? null : voucherEntity.toVoucher();
     }
+
 }

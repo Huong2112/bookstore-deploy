@@ -28,6 +28,7 @@ public class ProductEntity {
     private String category;
     private int discount;
 
+
     public static ProductEntity toEntity(Product product) {
         return ProductEntity.builder()
                 .id(product.getId())

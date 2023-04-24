@@ -1,5 +1,7 @@
 package hanu.edu.domain.product.model;
 
+import hanu.edu.domain.discount.model.Discount;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
