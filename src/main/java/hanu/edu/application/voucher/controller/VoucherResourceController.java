@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class VoucherResourceController {
@@ -15,10 +17,14 @@ public class VoucherResourceController {
 
     @PostMapping("/admin/voucher")
     public ResponseEntity<String> create(@RequestBody VoucherDTO voucherDTO) {
-        voucherResourceService.create(new Voucher(voucherDTO.getTitle(), voucherDTO.getRate(), voucherDTO.getDueDate()));
+        voucherResourceService.create(new Voucher(voucherDTO.getCustomerId(), voucherDTO.getTitle(), voucherDTO.getRate(), voucherDTO.getDueDate()));
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
+    @GetMapping("/admin/vouchers")
+    public List<Voucher> getAll() {
+        return voucherResourceService.getAllVouchers();
+    }
     @GetMapping("/admin/voucher/{id}")
     public Voucher getById(@PathVariable long id) {
         return voucherResourceService.getById(id);
@@ -28,5 +34,10 @@ public class VoucherResourceController {
     public ResponseEntity<String> deleteById(@PathVariable long id) {
         voucherResourceService.deleteById(id);
         return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
+    @GetMapping("/vouchers/{customerId}")
+    public List<Voucher> getVouchersByCustomerId(@PathVariable long customerId) {
+        return voucherResourceService.getVouchersByCustomerId(customerId);
     }
 }

@@ -17,11 +17,10 @@ import org.hibernate.annotations.NaturalId;
 @AllArgsConstructor
 @SuperBuilder
 @Getter
-@Setter
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
     @NaturalId(mutable = true)
     private String username;
     @NaturalId(mutable = true)

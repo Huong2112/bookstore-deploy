@@ -13,11 +13,13 @@ import java.sql.Date;
 @Setter
 public class Voucher {
     private long id;
+    private long customerId;
     private String title;
     private double rate;
     private Date dueDate;
 
-    public Voucher(String title, double rate, Date dueDate) {
+    public Voucher(long customerId, String title, double rate, Date dueDate) {
+        this.customerId = customerId;
         this.title = title;
         this.rate = rate;
         this.dueDate = dueDate;

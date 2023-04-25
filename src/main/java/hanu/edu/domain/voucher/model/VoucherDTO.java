@@ -12,6 +12,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @Getter
 public class VoucherDTO {
+    private long customerId;
     @NotNull(message = "Name can't be null")
     private String title;
     @NotNull(message = "Description can't be null")

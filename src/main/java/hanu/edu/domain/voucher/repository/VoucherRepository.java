@@ -3,6 +3,8 @@ package hanu.edu.domain.voucher.repository;
 import hanu.edu.domain.voucher.model.Voucher;
 import hanu.edu.infrastructure.voucher.entity.VoucherEntity;
 
+import java.util.List;
+
 public interface VoucherRepository {
 
     Voucher getById(long id);
@@ -11,5 +13,7 @@ public interface VoucherRepository {
 
     void deleteById(long id);
 
-    Voucher getByTitle(String title);
+    List<Voucher> getAllVouchers();
+
+    List<Voucher> getVouchersByCustomerId(long customerId);
 }
