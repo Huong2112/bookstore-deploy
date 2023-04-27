@@ -104,17 +104,4 @@ public class ItemResourceShoppingCartService {
     }
 }
 
-@Builder
-@Getter
-class OutputCart {
-    private long quantity;
-    private long productId;
-    private String name;
-    private double price;
-    private String description;
-    private long inStock;
-    private List<String> images;
-    private String category;
-}
-
 
