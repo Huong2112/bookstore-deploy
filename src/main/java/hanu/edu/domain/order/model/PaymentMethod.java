@@ -6,7 +6,7 @@ public enum PaymentMethod {
     CASH, ONLINE;
 
     public static PaymentMethod of(String paymentMethod) {
-        if(paymentMethod.equalsIgnoreCase("Cash")) {
+        if (paymentMethod.equalsIgnoreCase("Cash")) {
             return CASH;
         } else if (paymentMethod.equalsIgnoreCase("Online")) {
             return ONLINE;

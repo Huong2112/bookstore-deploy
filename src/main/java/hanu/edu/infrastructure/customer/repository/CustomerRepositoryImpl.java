@@ -26,12 +26,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public void deleteById(long id) {
         customerJPARepository.deleteById(id);
     }
-
-//    @Override
-//    public void save(CustomerEntity customerEntity) {
-//        customerJPARepository.save(customerEntity);
-//    }
-
+    
     @Override
     public Customer getById(long customerId) {
         return customerJPARepository.getById(customerId).toCustomer();

@@ -9,11 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
-
 //CRUD methods
 @Service
 public class CustomerResourceService extends UserResourceService {
@@ -40,13 +35,12 @@ public class CustomerResourceService extends UserResourceService {
         int passwordLength = customerRepository.getById(customerId).getPassword().length();
         String password = customerRepository.getById(customerId).getPassword();
         char[] chars = password.toCharArray();
-        for (char decoderPass: chars) {
+        for (char decoderPass : chars) {
             decoderPass -= passwordLength;
             customerRepository.getById(customerId).setPassword(String.valueOf(decoderPass));
         }
         return customerRepository.getById(customerId);
     }
-
 
 
 //    public void deleteById(long customerId) {

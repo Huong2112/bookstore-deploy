@@ -23,6 +23,7 @@ public class Product {
     private long inStock;
     private List<String> images;
     private String category;
+    private int discount;
 
     public Product(String name, double price, String description, long inStock, List<String> images, String category) {
         this.name = name;
@@ -31,5 +32,20 @@ public class Product {
         this.inStock = inStock;
         this.images = images;
         this.category = category;
+        this.discount = 0;
+    }
+
+    public Product(String name, double price, String description, long inStock, List<String> images, String category, int discount) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.inStock = inStock;
+        this.images = images;
+        this.category = category;
+        this.discount = discount;
+    }
+
+    public double getCurrentPrice() {
+        return price - price * discount / 100;
     }
 }

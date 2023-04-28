@@ -7,6 +7,7 @@ import hanu.edu.domain.order.model.Order;
 import hanu.edu.domain.order.model.OrderStatus;
 import hanu.edu.domain.order.model.PaymentMethod;
 import hanu.edu.domain.shoppingCart.model.Item;
+import hanu.edu.infrastructure.voucher.entity.VoucherEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,9 +36,11 @@ public class OrderEntity {
     private String paymentMethod;
     private String messageOfCustomer;
     private String addressToReceive;
-
     @Column(columnDefinition = "TEXT")
     private String customerInfo;
+    @OneToOne
+    @PrimaryKeyJoinColumn(name = "voucherId")
+    private VoucherEntity voucher;
 
     public static OrderEntity toEntity(Order order) {
         try {

@@ -14,8 +14,8 @@ public class UpdateStatusOrderService {
     private OrderRepository orderRepository;
 
     public void updateStatusOrder(long id, String fromStatus, String toStatus) {
-        if(fromStatus.equalsIgnoreCase(String.valueOf(OrderStatus.SHIPPING)) &&
-        toStatus.equalsIgnoreCase(String.valueOf(OrderStatus.CUSTOMER_REQUEST_CANCEL))) {
+        if (fromStatus.equalsIgnoreCase(String.valueOf(OrderStatus.SHIPPING)) &&
+                toStatus.equalsIgnoreCase(String.valueOf(OrderStatus.CUSTOMER_REQUEST_CANCEL))) {
             throw new BaseException("400", "Not allow to cancel while shipping");
         }
         Order order = orderRepository.getById(id);

@@ -21,10 +21,8 @@ import java.util.List;
 public class ShoppingCartEntity {
     @Id
     private long customerId;
-
     @Column(name = "items", columnDefinition = "TEXT")
     private String items;
-
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "customerId")
     private CustomerEntity customerEntity;

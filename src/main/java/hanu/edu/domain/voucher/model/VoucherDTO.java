@@ -1,27 +1,22 @@
 package hanu.edu.domain.voucher.model;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
-public class Voucher {
-    private long id;
+public class VoucherDTO {
     private long customerId;
+    @NotNull(message = "Name can't be null")
     private String title;
+    @NotNull(message = "Description can't be null")
+    @Min(value = 0, message = "Invalid value")
     private double rate;
     private Date dueDate;
-
-    public Voucher(long customerId, String title, double rate, Date dueDate) {
-        this.customerId = customerId;
-        this.title = title;
-        this.rate = rate;
-        this.dueDate = dueDate;
-    }
 }

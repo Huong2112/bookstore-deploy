@@ -18,7 +18,7 @@ public class ProductResourceController {
     @PostMapping("/admin/product")
     public ResponseEntity<String> create(@RequestBody ProductDTO productDTO) {
         productResourceService.create(new Product(productDTO.getName(), productDTO.getPrice(), productDTO.getDescription(),
-                productDTO.getInStock(), productDTO.getImages(), productDTO.getCategory()));
+                productDTO.getInStock(), productDTO.getImages(), productDTO.getCategory(), productDTO.getDiscount()));
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
@@ -36,7 +36,7 @@ public class ProductResourceController {
     @PutMapping("/admin/product/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable long id, @Valid @RequestBody ProductDTO productDTO) {
         productResourceService.update(new Product(id, productDTO.getName(), productDTO.getPrice(), productDTO.getDescription(),
-                productDTO.getInStock(), productDTO.getImages(), productDTO.getCategory()));
+                productDTO.getInStock(), productDTO.getImages(), productDTO.getCategory(), productDTO.getDiscount()));
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 

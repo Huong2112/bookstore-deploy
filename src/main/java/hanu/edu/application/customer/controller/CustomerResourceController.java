@@ -11,9 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.crypto.NoSuchPaddingException;
-import java.security.NoSuchAlgorithmException;
-
 
 @RestController
 public class CustomerResourceController {
@@ -32,6 +29,7 @@ public class CustomerResourceController {
         }
         return (Customer) customerResourceService.getByUsername(username).get();
     }
+
     @GetMapping("/customer/{customerId}")
     public Customer getCustomerAccount(@PathVariable long customerId) {
 

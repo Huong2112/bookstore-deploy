@@ -21,4 +21,6 @@ public class ProductDTO {
     private long inStock;
     private List<String> images;
     private String category;
+    @Min(value = 0, message = "Discount value can't not be less than 0")
+    private int discount;
 }
