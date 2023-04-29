@@ -15,7 +15,6 @@ public class VoucherDTO {
     private long customerId;
     @NotNull(message = "Name can't be null")
     private String title;
-    @NotNull(message = "Description can't be null")
     @Min(value = 0, message = "Invalid value")
     private double rate;
     private Date dueDate;

@@ -17,6 +17,15 @@ public class Voucher {
     private String title;
     private double rate;
     private Date dueDate;
+    private String customerEmail;
+
+    public Voucher(long customerId, String title, double rate, Date dueDate, String customerEmail) {
+        this.customerId = customerId;
+        this.title = title;
+        this.rate = rate;
+        this.dueDate = dueDate;
+        this.customerEmail = customerEmail;
+    }
 
     public Voucher(long customerId, String title, double rate, Date dueDate) {
         this.customerId = customerId;
@@ -24,4 +33,14 @@ public class Voucher {
         this.rate = rate;
         this.dueDate = dueDate;
     }
+
+    public Voucher(long id, long customerId, String title, double rate, Date dueDate) {
+        this.id = id;
+        this.customerId = customerId;
+        this.title = title;
+        this.rate = rate;
+        this.dueDate = dueDate;
+    }
+
+
 }
