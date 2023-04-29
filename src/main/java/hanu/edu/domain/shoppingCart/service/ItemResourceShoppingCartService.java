@@ -91,7 +91,10 @@ public class ItemResourceShoppingCartService {
                         .inStock(product.getInStock())
                         .images(product.getImages())
                         .category(product.getCategory())
-                        .quantity(i.getQuantity()).build();
+                        .quantity(i.getQuantity())
+                        .discount(product.getDiscount())
+                        .build();
+
                 outputCarts.add(outputCart);
             }
         }

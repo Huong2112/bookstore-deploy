@@ -22,4 +22,9 @@ public class UserRepositoryImpl implements UserRepository {
         return userJPARepository.findByUsername(username);
     }
 
+    @Override
+    public Optional<UserEntity> findById(long id) {
+        return userJPARepository.findById(id);
+    }
+
 }

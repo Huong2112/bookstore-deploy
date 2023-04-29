@@ -2,6 +2,8 @@ package hanu.edu.application.voucher.controller;
 
 import hanu.edu.domain.customer.model.Customer;
 import hanu.edu.domain.customer.service.CustomerResourceService;
+import hanu.edu.domain.user.model.User;
+import hanu.edu.domain.user.service.UserResourceService;
 import hanu.edu.domain.voucher.model.Voucher;
 import hanu.edu.domain.voucher.model.VoucherDTO;
 import hanu.edu.domain.voucher.service.VoucherResourceService;
@@ -12,13 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
 public class VoucherResourceController {
     private final VoucherResourceService voucherResourceService;
 
-    private final CustomerResourceService customerResourceService;
+    private final UserResourceService userResourceService;
 
     @PostMapping("/admin/voucher")
     public ResponseEntity<String> create(@RequestBody VoucherDTO voucherDTO) {
@@ -32,10 +35,10 @@ public class VoucherResourceController {
         HashMap<Voucher, String> map = new HashMap<>();
         for (Voucher voucher : vouchers) {
             long customerId = voucher.getCustomerId();
-            Customer customer = customerResourceService.getById(customerId);
+            Optional<User> user = userResourceService.getUserById(customerId);
             String email;
-            if (customer != null) {
-                email = customer.getEmail();
+            if (user.isPresent()) {
+                email = user.get().getEmail();
             } else {
                 email = "";
             }

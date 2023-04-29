@@ -19,6 +19,11 @@ public class UserResourceService {
         return user.map(UserEntity::toUser);
     }
 
+    public Optional<User> getUserById(long id) {
+        Optional<UserEntity> user = userRepository.findById(id);
+        return user.map(UserEntity::toUser);
+    }
+
     public void create(User user) {
         userRepository.save(UserEntity.toEntity(user));
     }

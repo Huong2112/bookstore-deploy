@@ -16,6 +16,7 @@ public class OutputCart {
     private long inStock;
     private List<String> images;
     private String category;
+    private int discount;
 
     public double getTotalPrice() {
         return price*quantity;
