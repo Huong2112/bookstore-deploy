@@ -22,20 +22,18 @@ public class PaypalController {
     @Autowired
     PaypalService service;
 
-    @PostMapping("/pay")
-    public ResponseEntity<?> payment(@RequestBody List<OutputCart> outputCart) throws PayPalRESTException {
-        double totalPrice = 0;
-        for (OutputCart cart : outputCart) {
-            totalPrice += cart.getTotalPrice();
-        }
+    @PostMapping("/pay/{totalPrice}")
+    public ResponseEntity<?> payment(@PathVariable  double totalPrice) throws PayPalRESTException {
         Payment payment = service.createPayment(
                 totalPrice,
                 "USD",
                 "paypal",
                 "sale",
                 "Order",
-                "http://localhost:8080/" + CANCEL_URL,
-                "http://localhost:8080/" + SUCCESS_URL);
+                "http://localhost:3000/fail" ,
+                "http://localhost:3000/success" );
+//                "http://localhost:8080/" + SUCCESS_URL);
+
         return new ResponseEntity<>(payment.getLinks(), org.springframework.http.HttpStatus.OK);
     }
 }
