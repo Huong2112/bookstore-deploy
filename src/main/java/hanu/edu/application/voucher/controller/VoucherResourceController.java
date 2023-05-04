@@ -1,7 +1,5 @@
 package hanu.edu.application.voucher.controller;
 
-import hanu.edu.domain.customer.model.Customer;
-import hanu.edu.domain.customer.service.CustomerResourceService;
 import hanu.edu.domain.user.model.User;
 import hanu.edu.domain.user.service.UserResourceService;
 import hanu.edu.domain.voucher.model.Voucher;
@@ -12,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +29,6 @@ public class VoucherResourceController {
     @GetMapping("/admin/vouchers")
     public List<Voucher> getAll() {
         List<Voucher> vouchers = voucherResourceService.getAllVouchers();
-        HashMap<Voucher, String> map = new HashMap<>();
         for (Voucher voucher : vouchers) {
             long customerId = voucher.getCustomerId();
             Optional<User> user = userResourceService.getUserById(customerId);
@@ -46,6 +42,7 @@ public class VoucherResourceController {
         }
         return vouchers;
     }
+
     @GetMapping("/admin/voucher/{id}")
     public Voucher getById(@PathVariable long id) {
         return voucherResourceService.getById(id);

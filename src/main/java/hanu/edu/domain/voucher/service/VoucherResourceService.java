@@ -1,6 +1,5 @@
 package hanu.edu.domain.voucher.service;
 
-import hanu.edu.domain.customer.model.Customer;
 import hanu.edu.domain.customer.repository.CustomerRepository;
 import hanu.edu.domain.voucher.model.Voucher;
 import hanu.edu.domain.voucher.repository.VoucherRepository;
@@ -26,9 +25,6 @@ public class VoucherResourceService {
 
     public List<Voucher> getAllVouchers() {
         return voucherRepository.getAllVouchers();
-    }
-    public Customer getCustomer(long customerId) {
-        return customerRepository.getById(customerId);
     }
 
     public List<Voucher> getVouchersByCustomerId(long id) {

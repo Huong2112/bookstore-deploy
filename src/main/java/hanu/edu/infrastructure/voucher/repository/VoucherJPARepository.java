@@ -7,6 +7,5 @@ import java.util.List;
 
 
 public interface VoucherJPARepository extends JpaRepository<VoucherEntity, Long> {
-    VoucherEntity findByTitle(String title);
     List<VoucherEntity> findByCustomerId(long id);
 }

@@ -32,8 +32,6 @@ public class VoucherRepositoryImpl implements VoucherRepository {
         voucherJPARepository.deleteById(id);
     }
 
-
-
     @Override
     public List<Voucher> getAllVouchers() {
         List<Voucher> list = new ArrayList<>();

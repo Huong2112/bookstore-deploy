@@ -19,6 +19,6 @@ public class OutputCart {
     private int discount;
 
     public double getTotalPrice() {
-        return price*quantity;
+        return price * quantity;
     }
 }

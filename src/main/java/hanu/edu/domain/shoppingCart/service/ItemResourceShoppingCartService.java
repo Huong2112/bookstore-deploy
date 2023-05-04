@@ -6,8 +6,6 @@ import hanu.edu.domain.shoppingCart.model.Item;
 import hanu.edu.domain.shoppingCart.model.ShoppingCart;
 import hanu.edu.domain.shoppingCart.repository.ShoppingCartRepository;
 import jakarta.transaction.Transactional;
-import lombok.Builder;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

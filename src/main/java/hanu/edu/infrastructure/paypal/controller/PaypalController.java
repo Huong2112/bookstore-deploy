@@ -2,13 +2,10 @@ package hanu.edu.infrastructure.paypal.controller;
 
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-import hanu.edu.domain.shoppingCart.service.OutputCart;
 import hanu.edu.infrastructure.paypal.service.PaypalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -23,15 +20,15 @@ public class PaypalController {
     PaypalService service;
 
     @PostMapping("/pay/{totalPrice}")
-    public ResponseEntity<?> payment(@PathVariable  double totalPrice) throws PayPalRESTException {
+    public ResponseEntity<?> payment(@PathVariable double totalPrice) throws PayPalRESTException {
         Payment payment = service.createPayment(
                 totalPrice,
                 "USD",
                 "paypal",
                 "sale",
                 "Order",
-                "http://localhost:3000/fail" ,
-                "http://localhost:3000/success" );
+                "http://localhost:3000/fail",
+                "http://localhost:3000/success");
 //                "http://localhost:8080/" + SUCCESS_URL);
 
         return new ResponseEntity<>(payment.getLinks(), org.springframework.http.HttpStatus.OK);
