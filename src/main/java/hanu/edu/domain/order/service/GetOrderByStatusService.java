@@ -7,6 +7,8 @@ import hanu.edu.domain.product.model.Product;
 import hanu.edu.domain.product.repository.ProductRepository;
 import hanu.edu.domain.security.exception.BaseException;
 import hanu.edu.domain.shoppingCart.model.Item;
+import hanu.edu.domain.voucher.model.Voucher;
+import hanu.edu.domain.voucher.service.VoucherResourceService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,18 @@ public class GetOrderByStatusService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private VoucherResourceService voucherResourceService;
+
     public List<OutputOrder> getOrderByStatus(String status) {
         List<Order> orders = orderRepository.getByOrderStatus(OrderStatus.of(status));
         if (orders == null) {
             throw new BaseException("404", "No order found");
         }
         List<OutputOrder> outputOrderList = new ArrayList<>();
-        double total = 0;
         for (Order order : orders) {
+            double total = 0;
+            Voucher voucher = voucherResourceService.getById(order.getVoucherId());
             List<OutputItemDetail> itemDetailList = new ArrayList<>();
             List<Item> items = order.getItems();
             for (Item item : items) {
@@ -47,7 +53,7 @@ public class GetOrderByStatusService {
             OutputOrder outputOrder = new OutputOrder(order.getId(), itemDetailList, order.getCustomerId(),
                     order.getVoucherId(), order.getCheckoutDate(), order.getOrderStatus().toString().toLowerCase(),
                     order.getPaymentMethod().toString().toLowerCase(),
-                    order.getMessageOfCustomer(), order.getAddressToReceive(), total);
+                    order.getMessageOfCustomer(), order.getAddressToReceive(), total * voucher.getRate());
             outputOrderList.add(outputOrder);
         }
         return outputOrderList;

@@ -5,6 +5,7 @@ import hanu.edu.domain.order.model.OrderDTO;
 import hanu.edu.domain.order.model.OrderStatus;
 import hanu.edu.domain.order.model.PaymentMethod;
 import hanu.edu.domain.order.repository.OrderRepository;
+import hanu.edu.domain.voucher.service.VoucherResourceService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class CheckoutOrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private VoucherResourceService voucherResourceService;
+
     public void checkoutOrder(@NotNull OrderDTO orderDTO, long customerId) {
         orderRepository.save(new Order(orderDTO.getItems(), customerId,
                 orderDTO.getVoucherId(), new Date(System.currentTimeMillis()),
@@ -24,5 +28,8 @@ public class CheckoutOrderService {
                 orderDTO.getMessageOfCustomer(),
                 orderDTO.getAddressToReceive(),
                 new StringBuilder().append(orderDTO.getCustomerName() + " ").append(orderDTO.getPhone()).toString()));
+        if(orderDTO.getVoucherId() != -1) {
+            voucherResourceService.deleteById(orderDTO.getVoucherId());
+        }
     }
 }
