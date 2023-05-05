@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 public class PaypalController {
 
 
-    private static final String SUCCESS_URL = "pay/success";
-    private static final String CANCEL_URL = "pay/cancel";
+    private static final String SUCCESS_URL = "/success";
+    private static final String CANCEL_URL = "/cancel";
 
     @Autowired
     PaypalService service;
@@ -27,8 +27,8 @@ public class PaypalController {
                 "paypal",
                 "sale",
                 "Order",
-                "http://localhost:3000/fail",
-                "http://localhost:3000/success");
+                "http://localhost:3000/" + SUCCESS_URL,
+                "http://localhost:3000/" + CANCEL_URL);
 //                "http://localhost:8080/" + SUCCESS_URL);
 
         return new ResponseEntity<>(payment.getLinks(), org.springframework.http.HttpStatus.OK);

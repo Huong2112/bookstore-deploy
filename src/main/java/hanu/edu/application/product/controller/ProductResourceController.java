@@ -5,20 +5,31 @@ import hanu.edu.domain.product.model.ProductDTO;
 import hanu.edu.domain.product.service.ProductResourceService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
 public class ProductResourceController {
 
+    @Autowired
     private final ProductResourceService productResourceService;
 
     @PostMapping("/admin/product")
     public ResponseEntity<String> create(@RequestBody ProductDTO productDTO) {
         productResourceService.create(new Product(productDTO.getName(), productDTO.getPrice(), productDTO.getDescription(),
                 productDTO.getInStock(), productDTO.getImages(), productDTO.getCategory(), productDTO.getDiscount()));
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
+    @PostMapping("/admin/product-image-upload/{id}")
+    public ResponseEntity<String> uploadImages(@RequestParam("image") List<MultipartFile> productImages, @PathVariable long id) {
+        productResourceService.uploadImages(id, productImages);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 

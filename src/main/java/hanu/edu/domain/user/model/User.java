@@ -104,4 +104,11 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
 }
