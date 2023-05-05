@@ -29,6 +29,12 @@ public class ItemResourceShoppingCartController {
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
+    @DeleteMapping("/cart/{customerId}")
+    public ResponseEntity<String> deleteAllItem(@PathVariable long customerId) {
+        itemResourceShoppingCartService.deleteAllItems(customerId);
+        return new ResponseEntity<>("Success", HttpStatus.OK);
+    }
+
     @PutMapping("/cart/{customerId}/{productId}/{quantity}")
     public ResponseEntity<String> updateItem(@PathVariable long customerId, @PathVariable long productId, @PathVariable long quantity) {
         itemResourceShoppingCartService.updateItem(customerId, productId, quantity);

@@ -103,6 +103,12 @@ public class ItemResourceShoppingCartService {
         ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
         return cart.getItems().size();
     }
+
+    public void deleteAllItems(long customerId) {
+        ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
+        cart.setItems(null);
+        shoppingCartRepository.save(cart);
+    }
 }
 
 

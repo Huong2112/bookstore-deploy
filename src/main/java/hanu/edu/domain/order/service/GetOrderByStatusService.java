@@ -50,10 +50,13 @@ public class GetOrderByStatusService {
                     itemDetailList.add(outputItemDetail);
                 }
             }
+            if(voucher != null) {
+                total = total * voucher.getRate();
+            }
             OutputOrder outputOrder = new OutputOrder(order.getId(), itemDetailList, order.getCustomerId(),
                     order.getVoucherId(), order.getCheckoutDate(), order.getOrderStatus().toString().toLowerCase(),
                     order.getPaymentMethod().toString().toLowerCase(),
-                    order.getMessageOfCustomer(), order.getAddressToReceive(), total * voucher.getRate());
+                    order.getMessageOfCustomer(), order.getAddressToReceive(), total);
             outputOrderList.add(outputOrder);
         }
         return outputOrderList;
