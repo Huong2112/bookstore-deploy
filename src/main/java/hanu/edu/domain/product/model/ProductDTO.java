@@ -17,7 +17,7 @@ public class ProductDTO {
     @Min(value = 0, message = "Price can't not be less than 0")
     private double price;
     private String description;
-    @Min(value = 0, message = "Number of product in stock can't not be less than 0")
+    @Min(value = 0, message = "Number of products in stock can't not be less than 0")
     private long inStock;
     private List<String> images;
     private String category;

@@ -15,11 +15,12 @@ import java.lang.reflect.Field;
 // Request
 public class UserDTO {
     @NotNull
+    @Length(min = 6, message = "Username must be at least 6 characters.")
     private String username;
     @NotNull
-    @Length(min = 6, message = "Password must be at least 6 characters")
+    @Length(min = 6, message = "Password must be at least 6 characters.")
     private String password;
-    @Email
+    @Email(message = "Invalid email!")
     @NotNull
     private String email;
 
