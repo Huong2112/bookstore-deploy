@@ -54,7 +54,9 @@ public class UserEntity {
                 .name(user.getName())
                 .age(user.getAge())
                 .address(user.getAddress())
-                .avatar(user.getAvatar()).build();
+                .avatar(user.getAvatar())
+                .phone(user.getPhone()).
+                build();
     }
 
     public User toUser() {

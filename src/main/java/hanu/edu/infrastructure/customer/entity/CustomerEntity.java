@@ -25,7 +25,9 @@ public class CustomerEntity extends UserEntity {
                 .name(customer.getName())
                 .age(customer.getAge())
                 .address(customer.getAddress())
-                .avatar(customer.getAvatar()).build();
+                .avatar(customer.getAvatar())
+                .phone(customer.getPhone())
+                .build();
     }
 
     public Customer toCustomer() {
