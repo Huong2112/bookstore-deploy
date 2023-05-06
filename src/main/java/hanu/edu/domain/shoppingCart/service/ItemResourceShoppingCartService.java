@@ -101,7 +101,7 @@ public class ItemResourceShoppingCartService {
 
     public int countItems(long customerId) {
         ShoppingCart cart = shoppingCartRepository.getByCustomerId(customerId);
-        return cart.getItems().size();
+        return cart.getItems() == null ? 0 : cart.getItems().size();
     }
 
     public void deleteAllItems(long customerId) {
