@@ -1,4 +1,4 @@
-package hanu.edu.infrastructure.paypal;
+package hanu.edu.domain.paypal.config;
 
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;

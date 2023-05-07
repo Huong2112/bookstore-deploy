@@ -1,4 +1,4 @@
-package hanu.edu.infrastructure.s3config;
+package hanu.edu.domain.s3config;
 
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

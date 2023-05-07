@@ -1,4 +1,4 @@
-package hanu.edu.infrastructure.paypal.service;
+package hanu.edu.domain.paypal.service;
 
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;

@@ -3,7 +3,7 @@ package hanu.edu.application.customer.controller;
 import hanu.edu.domain.customer.model.Customer;
 import hanu.edu.domain.customer.model.CustomerDTO;
 import hanu.edu.domain.customer.service.CustomerResourceService;
-import hanu.edu.infrastructure.s3config.Response;
+import hanu.edu.domain.s3config.Response;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +40,8 @@ public class CustomerResourceController {
 
     @PutMapping("/customer/{customerId}")
     public ResponseEntity<String> updateCustomer(@PathVariable long customerId, @Valid @RequestBody CustomerDTO customerDTO) {
-        customerResourceService.update(new Customer(customerId, customerDTO.getUsername(), customerDTO.getEmail(), customerDTO.getPassword(), customerDTO.getAddress(), customerDTO.getPhone(), customerDTO.getAge(), customerDTO.getAvatar()));
+        String avatar = customerResourceService.getById(customerId).getAvatar();
+        customerResourceService.update(new Customer(customerId, customerDTO.getUsername(), customerDTO.getEmail(), customerDTO.getPassword(), customerDTO.getAddress(), customerDTO.getPhone(), customerDTO.getAge(), avatar));
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 

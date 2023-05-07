@@ -1,8 +1,8 @@
-package hanu.edu.infrastructure.paypal.controller;
+package hanu.edu.application.paypal.controller;
 
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-import hanu.edu.infrastructure.paypal.service.PaypalService;
+import hanu.edu.domain.paypal.service.PaypalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

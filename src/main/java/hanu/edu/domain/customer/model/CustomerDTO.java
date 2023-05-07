@@ -21,7 +21,6 @@ public class CustomerDTO {
     @Length(min = 6, message = "Password should contains at least 6 characters.")
     private String password;
     private String address;
-    private String avatar;
     @Pattern(regexp = "[0-9]{10}", message = "Invalid phone number.")
     private String phone;
     @Min(value = 10, message = "Age should not be less than 10.")

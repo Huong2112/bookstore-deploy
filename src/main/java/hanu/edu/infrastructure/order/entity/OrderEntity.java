@@ -18,13 +18,12 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "item_order")
+@Table(name = "items_order")
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
