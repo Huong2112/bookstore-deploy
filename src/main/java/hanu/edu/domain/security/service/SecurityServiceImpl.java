@@ -45,7 +45,7 @@ public class SecurityServiceImpl implements SecurityService {
         BaseResponseDTO response = new BaseResponseDTO();
         validateAccount(userDTO);
         Customer customer = insertUser(userDTO);
-        customer.setAvatar("https://news.meeycdn.net/uploads/images/2023/01/06/avatar-cute-gau-1672991103.jpg");
+        customer.setAvatar("/images/account.jpg");
         try {
             // create user
             customerResourceService.create(customer);
